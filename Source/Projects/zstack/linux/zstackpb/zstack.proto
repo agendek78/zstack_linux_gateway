@@ -1,0 +1,1389 @@
+enum ZStackSysIDs
+{
+	RPC_SYS_PROTOBUF = 17;
+}
+
+enum ZStackCmdIDs
+{
+	SYS_RESET_REQ = 0;
+	SYS_VERSION_REQ = 2;
+	SYS_CONFIG_READ_REQ = 3;
+	SYS_CONFIG_WRITE_REQ = 4;
+	SYS_SET_TX_POWER_REQ = 7;
+	SYS_NWK_INFO_READ_REQ = 8;
+	SYS_NWK_INFO_WRITE_REQ = 9;
+	SYS_VERSION_RSP = 10;
+	SYS_CONFIG_READ_RSP = 11;
+	SYS_SET_TX_POWER_RSP = 13;
+	SYS_NWK_INFO_READ_RSP = 14;
+	SYS_NWK_INFO_WRITE_RSP = 15;
+	DEV_START_REQ = 16;
+	DEV_NWK_DISCOVERY_REQ = 17;
+	DEV_JOIN_REQ = 18;
+	DEV_REJOIN_REQ = 19;
+	DEV_ZDO_CBS_REQ = 20;
+	DEV_NWK_ROUTE_REQ = 21;
+	DEV_NWK_CHECK_ROUTE_REQ = 22;
+	DEV_JAMMER_IND = 23;
+	APS_REMOVE_GROUP = 24;
+	APS_REMOVE_ALL_GROUPS = 25;
+	APS_FIND_ALL_GROUPS_REQ = 26;
+	APS_FIND_ALL_GROUPS_RSP = 27;
+	APS_FIND_GROUP_REQ = 28;
+	APS_FIND_GROUP_RSP = 29;
+	APS_ADD_GROUP = 30;
+	APS_COUNT_ALL_GROUPS = 31;
+	AF_REGISTER_REQ = 32;
+	AF_UNREGISTER_REQ = 33;
+	AF_DATA_REQ = 34;
+	AF_INTERPAN_CTL_REQ = 35;
+	AF_CONFIG_GET_REQ = 36;
+	AF_CONFIG_SET_REQ = 37;
+	ZDO_NWK_ADDR_REQ = 48;
+	ZDO_IEEE_ADDR_REQ = 49;
+	ZDO_NODE_DESC_REQ = 50;
+	ZDO_POWER_DESC_REQ = 51;
+	ZDO_SIMPLE_DESC_REQ = 52;
+	ZDO_ACTIVE_ENDPOINT_REQ = 53;
+	ZDO_MATCH_DESC_REQ = 54;
+	ZDO_COMPLEX_DESC_REQ = 55;
+	ZDO_SERVER_DISC_REQ = 57;
+	ZDO_END_DEVICE_BIND_REQ = 58;
+	ZDO_BIND_REQ = 59;
+	ZDO_UNBIND_REQ = 60;
+	ZDO_MGMT_NWK_DISC_REQ = 61;
+	ZDO_MGMT_LQI_REQ = 62;
+	ZDO_MGMT_RTG_REQ = 63;
+	ZDO_MGMT_BIND_REQ = 64;
+	ZDO_MGMT_LEAVE_REQ = 65;
+	ZDO_MGMT_DIRECT_JOIN_REQ = 66;
+	ZDO_MGMT_PERMIT_JOIN_REQ = 67;
+	ZDO_MGMT_NWK_UPDATE_REQ = 68;
+	ZDO_DEVICE_ANNOUNCE_REQ = 69;
+	ZDO_USER_DESCR_SET_REQ = 70;
+	ZDO_USER_DESC_REQ = 71;
+	ZDO_DEVICE_ANNOUNCE = 72;
+	ZDO_NWK_ADDR_RSP = 96;
+	ZDO_IEEE_ADDR_RSP = 97;
+	ZDO_NODE_DESC_RSP = 98;
+	ZDO_POWER_DESC_RSP = 99;
+	ZDO_SIMPLE_DESC_RSP = 100;
+	ZDO_ACTIVE_EP_RSP = 101;
+	ZDO_MATCH_DESC_RSP = 102;
+	ZDO_COMPLEX_DESC_RSP = 103;
+	ZDO_USER_DESC_RSP = 104;
+	ZDO_USER_DESC_SET_RSP = 105;
+	ZDO_SERVER_DISC_RSP = 106;
+	ZDO_END_DEVICE_BIND_RSP = 107;
+	ZDO_BIND_RSP = 108;
+	ZDO_UNBIND_RSP = 109;
+	ZDO_MGMT_NWK_DISC_RSP = 110;
+	ZDO_MGMT_LQI_RSP = 111;
+	ZDO_MGMT_RTG_RSP = 112;
+	ZDO_MGMT_BIND_RSP = 113;
+	ZDO_MGMT_LEAVE_RSP = 114;
+	ZDO_MGMT_DIRECT_JOIN_RSP = 115;
+	ZDO_MGMT_PERMIT_JOIN_RSP = 116;
+	ZDO_MGMT_NWK_UPDATE_NOTIFY = 117;
+	ZDO_END_DEVICE_TIMEOUT_RSP = 118;
+	ZDO_SRC_RTG_IND = 128;
+	ZDO_CONCENTRATOR_IND = 129;
+	ZDO_NWK_DISC_CNF = 130;
+	ZDO_BEACON_NOTIFY_IND = 131;
+	ZDO_JOIN_CNF = 132;
+	ZDO_LEAVE_CNF = 133;
+	ZDO_LEAVE_IND = 134;
+	AF_CONFIG_GET_RSP = 135;
+	SYS_RESET_IND = 144;
+	AF_DATA_CONFIRM_IND = 145;
+	AF_INCOMING_MSG_IND = 146;
+	AF_REFLECT_ERROR_IND = 147;
+	DEV_STATE_CHANGE_IND = 148;
+	ZDO_TC_DEVICE_IND = 149;
+	DEV_PERMIT_JOIN_IND = 150;
+	SEC_NWK_KEY_GET_REQ = 160;
+	SEC_NWK_KEY_SET_REQ = 161;
+	SEC_NWK_KEY_UPDATE_REQ = 162;
+	SEC_NWK_KEY_SWITCH_REQ = 163;
+	SEC_APS_LINKKEY_GET_REQ = 164;
+	SEC_APS_LINKKEY_SET_REQ = 165;
+	SEC_APS_LINKKEY_REMOVE_REQ = 166;
+	SEC_APS_REMOVE_REQ = 167;
+	SEC_NWK_KEY_GET_RSP = 176;
+	SEC_APS_LINKKEY_GET_RSP = 177;
+}
+
+enum ZStatusValues
+{
+	ZSuccess = 0;
+	ZFailure = 1;
+	ZInvalidParameter = 2;
+	ZDecodeError = 3;
+	ZMemError = 16;
+	ZBufferFull = 17;
+	ZUnsupportedMode = 18;
+	ZMacMemError = 19;
+	ZSapiInProgress = 32;
+	ZSapiTimeout = 33;
+	ZSapiInit = 34;
+	ZNotAuthorized = 126;
+	ZMalformedCmd = 128;
+	ZUnsupClusterCmd = 129;
+	ZOtaAbort = 149;
+	ZOtaImageInvalid = 150;
+	ZOtaWaitForData = 151;
+	ZOtaNoImageAvailable = 152;
+	ZOtaRequireMoreImage = 153;
+	ZApsFail = 177;
+	ZApsTableFull = 178;
+	ZApsIllegalRequest = 179;
+	ZApsInvalidBinding = 180;
+	ZApsUnsupportedAttrib = 181;
+	ZApsNotSupported = 182;
+	ZApsNoAck = 183;
+	ZApsDuplicateEntry = 184;
+	ZApsNoBoundDevice = 185;
+	ZApsNotAllowed = 186;
+	ZApsNotAuthenticated = 187;
+	ZSecNoKey = 161;
+	ZSecOldFrmCount = 162;
+	ZSecMaxFrmCount = 163;
+	ZSecCcmFail = 164;
+	ZNwkInvalidParam = 193;
+	ZNwkInvalidRequest = 194;
+	ZNwkNotPermitted = 195;
+	ZNwkStartupFailure = 196;
+	ZNwkAlreadyPresent = 197;
+	ZNwkSyncFailure = 198;
+	ZNwkTableFull = 199;
+	ZNwkUnknownDevice = 200;
+	ZNwkUnsupportedAttribute = 201;
+	ZNwkNoNetworks = 202;
+	ZNwkLeaveUnconfirmed = 203;
+	ZNwkNoAck = 204;
+	ZNwkNoRoute = 205;
+	ZAfDuplicateEndpoint = 208;
+	ZAfEndpointMax = 209;
+}
+
+enum AFAddrMode
+{
+	NONE = 0;
+	GROUP = 1;
+	SHORT = 2;
+	EXT = 3;
+	BROADCAST = 15;
+}
+
+enum ResetTypes
+{
+	DEVICE = 0;
+	SERIAL_BOOTLOADER = 1;
+}
+
+enum ResetReasons
+{
+	POWERUP = 0;
+	EXTERNAL = 1;
+	WATCHDOG = 2;
+}
+
+enum LogicalTypes
+{
+	COORDINATOR = 0;
+	ROUTER = 1;
+	ENDDEVICE = 2;
+	UNKNOWN_TYPE = 3;
+}
+
+enum NetworkLatency
+{
+	NO_LATENCY_REQS = 0;
+	FAST_BEACONS = 1;
+	SLOW_BEACONDS = 2;
+}
+
+enum NwkAddrReqType
+{
+	SINGLE_DEVICE = 0;
+	EXTENDED_W_ASSOCDEVS = 1;
+}
+
+enum PowerLevel
+{
+	LEVEL_CRITICAL = 0;
+	LEVEL_33 = 4;
+	LEVEL_66 = 8;
+	LEVEL_100 = 12;
+}
+
+enum PowerModes
+{
+	POWER_SYNCHRONIZED = 0;
+	POWER_PERIODIC = 1;
+	POWER_STIMULATED = 2;
+}
+
+enum ZdpStatus
+{
+	SUCCESS = 0;
+	INVALID_REQTYPE = 128;
+	DEVICE_NOT_FOUND = 129;
+	INVALID_EP = 130;
+	NOT_ACTIVE = 131;
+	NOT_SUPPORTED = 132;
+	TIMEOUT = 133;
+	NO_MATCH = 134;
+	NO_ENTRY = 136;
+	NO_DESCRIPTOR = 137;
+	INSUFFICIENT_SPACE = 138;
+	NOT_PERMITTED = 139;
+	TABLE_FULL = 140;
+	NOT_AUTHORIZED = 141;
+	BINDING_TABLE_FULL = 142;
+}
+
+enum DevState
+{
+	HOLD = 0;
+	INIT = 1;
+	NWK_DISC = 2;
+	NWK_JOINING = 3;
+	NWK_REJOIN = 4;
+	END_DEVICE_UNAUTH = 5;
+	DEV_END_DEVICE = 6;
+	DEV_ROUTER = 7;
+	COORD_STARTING = 8;
+	DEV_ZB_COORD = 9;
+	NWK_ORPHAN = 10;
+}
+
+enum RouteStatus
+{
+	ROUTE_ACTIVE = 0;
+	ROUTE_DISCOVERY_UNDERWAY = 1;
+	ROUTE_DISCOVERY_FAILED = 2;
+	ROUTE_INACTIVE = 3;
+	ROUTE_VALIDATION_UNDERWAY = 4;
+}
+
+enum RxOnWhenIdleType
+{
+	RX_ON_WHEN_IDLE_OFF = 0;
+	RX_ON_WHEN_IDLE_ON = 1;
+	RX_ON_WHEN_IDLE_UNKNOWN = 2;
+}
+
+enum RelationType
+{
+	REL_PARENT = 0;
+	REL_CHILD = 1;
+	REL_SIBLING = 2;
+	REL_UNKNOWN = 3;
+	REL_PREVIOUS_CHILD = 4;
+}
+
+enum PermitJoinType
+{
+	NEIGHBOR_NOT_ACCEPTING_JOIN = 0;
+	NEIGHBOR_ACCEPTING_JOIN = 1;
+	NEIGHBOR_UNKNOWN_JOIN = 2;
+}
+
+message AFAddr
+{
+	required AFAddrMode addrmode = 1;
+	optional uint32 shortaddr = 2;
+	optional fixed64 extaddr = 3;
+	optional uint32 endpoint = 4;
+	optional uint32 panid = 5;
+}
+
+message StartupOptions
+{
+	required bool clearstate = 1;
+	required bool clearconfig = 2;
+}
+
+message SimpleDescriptor
+{
+	required uint32 endpoint = 1;
+	required uint32 profileid = 2;
+	required uint32 deviceid = 3;
+	required uint32 devicever = 4;
+	repeated uint32 inputclusters = 5;
+	repeated uint32 outputclusters = 6;
+}
+
+message TransOptions
+{
+	optional bool wildcardprofileid = 1;
+	optional bool ackrequest = 2;
+	optional bool limitconcentrator = 3;
+	optional bool suppressroutedisc = 4;
+	optional bool apssecurity = 5;
+	optional bool skiprouting = 6;
+}
+
+message CapabilityInfo
+{
+	required bool pancoord = 1;
+	required bool ffd = 2;
+	required bool mainspower = 3;
+	required bool rxonwhenidle = 4;
+	required bool security = 5;
+}
+
+message ServerCapabilities
+{
+	required bool primarytrustcenter = 1;
+	required bool backuptrustcenter = 2;
+	required bool primarybindingtablecache = 3;
+	required bool backupbindingtablecache = 4;
+	required bool primarydiscoverycache = 5;
+	required bool backupdiscoverycache = 6;
+	required bool networkmanager = 7;
+}
+
+message BindRec
+{
+	required fixed64 srcaddr = 1;
+	required uint32 srcendpoint = 2;
+	required uint32 clusterid = 3;
+	required AFAddr dstaddr = 4;
+}
+
+message LeaveOptions
+{
+	required bool rejoin = 1;
+	required bool removechildren = 2;
+}
+
+message NodeDescriptor
+{
+	required LogicalTypes logicaltype = 1;
+	required bool complexdescavail = 2;
+	required bool userdescavail = 3;
+	required uint32 apsflags = 4;
+	required uint32 freqband = 5;
+	required CapabilityInfo capinfo = 6;
+	required uint32 manufacturercode = 7;
+	required uint32 maxbuffersize = 8;
+	required uint32 maxintransfersize = 9;
+	required ServerCapabilities servermask = 10;
+	required uint32 maxouttransfersize = 11;
+	required uint32 desccap = 12;
+}
+
+message PowerSource
+{
+	required bool mains = 1;
+	required bool recharge = 2;
+	required bool dispose = 3;
+}
+
+message PowerDescriptor
+{
+	required PowerModes powermode = 1;
+	required PowerSource availpowersource = 2;
+	required PowerSource currentpowersource = 3;
+	required PowerLevel currentpowerlevel = 4;
+}
+
+message NwkDiscItem
+{
+	required fixed64 extendedpanid = 1;
+	required uint32 logicalchan = 2;
+	required uint32 stackprofile = 3;
+	required uint32 version = 4;
+	required uint32 beaconorder = 5;
+	required uint32 superframeorder = 6;
+	required bool permitjoin = 7;
+}
+
+message NeighborLqiItem
+{
+	required fixed64 extendedpanid = 1;
+	required fixed64 extendedaddr = 2;
+	required uint32 nwkaddr = 3;
+	required LogicalTypes devicetype = 4;
+	required RxOnWhenIdleType rxonwhenidle = 5;
+	required RelationType relationship = 6;
+	required PermitJoinType permit = 7;
+	required uint32 depth = 8;
+	required uint32 lqi = 9;
+}
+
+message RtgItem
+{
+	required uint32 dstaddr = 1;
+	required uint32 nexthop = 2;
+	required RouteStatus status = 3;
+	required bool memoryconstrained = 4;
+	required bool manytoone = 5;
+	required bool routerecordrequired = 6;
+}
+
+message BindItem
+{
+	required fixed64 srcaddr = 1;
+	required uint32 srcendpoint = 2;
+	required uint32 clustedid = 3;
+	required AFAddr dstaddr = 4;
+}
+
+message DeviceTypes
+{
+	required bool coodinator = 1;
+	required bool router = 2;
+	required bool enddevice = 3;
+}
+
+message SysResetReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_RESET_REQ];
+	required ResetTypes type = 2;
+	required bool newnwkstate = 3;
+	optional bool shutdown = 4;
+}
+
+message SysVersionReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_VERSION_REQ];
+}
+
+message SysConfigReadReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_CONFIG_READ_REQ];
+	required bool preconfigkeyenable = 2;
+	required bool securitymodeenable = 3;
+	required bool usedefaulttclk = 4;
+	required bool pollrate = 5;
+	required bool queuedpollrate = 6;
+	required bool responsepollrate = 7;
+	required bool apsackwaitduration = 8;
+	required bool bindingtime = 9;
+	required bool panid = 10;
+	required bool pollfailureretries = 11;
+	required bool indirectmsgtimeout = 12;
+	required bool apsframeretries = 13;
+	required bool bcastretries = 14;
+	required bool passiveacktimeout = 15;
+	required bool bcastdeliverytime = 16;
+	required bool routeexpirytime = 17;
+	required bool userdesc = 18;
+	required bool preconfigkey = 19;
+	required bool chanlist = 20;
+	required bool multicastradius = 21;
+	required bool extendedpanid = 22;
+	required bool ieeeaddr = 23;
+	required bool macrxonidle = 24;
+	required bool snifferfeature = 25;
+	required bool concentratorenable = 26;
+	required bool concentratordisctime = 27;
+}
+
+message SysConfigWriteReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_CONFIG_WRITE_REQ];
+	optional bool preconfigkeyenable = 2;
+	optional bool securitymodeenable = 3;
+	optional bool usedefaulttclk = 4;
+	optional uint32 pollrate = 5;
+	optional uint32 queuedpollrate = 6;
+	optional uint32 responsepollrate = 7;
+	optional uint32 apsackwaitduration = 8;
+	optional uint32 bindingtime = 9;
+	optional uint32 panid = 10;
+	optional uint32 pollfailureretries = 11;
+	optional uint32 indirectmsgtimeout = 12;
+	optional uint32 apsframeretries = 13;
+	optional uint32 bcastretries = 14;
+	optional uint32 passiveacktimeout = 15;
+	optional uint32 bcastdeliverytime = 16;
+	optional uint32 routeexpirytime = 17;
+	optional bytes userdesc = 18;
+	optional bytes preconfigkey = 19;
+	optional uint32 chanlist = 20;
+	optional uint32 multicastradius = 21;
+	optional fixed64 extendedpanid = 22;
+	optional fixed64 ieeeaddr = 23;
+	optional bool macrxonidle = 24;
+	optional bool snifferfeature = 25;
+	optional bool concentratorenable = 26;
+	optional uint32 concentratordisctime = 27;
+}
+
+message SysSetTxPowerReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_SET_TX_POWER_REQ];
+	required int32 requestedtxpower = 2;
+}
+
+message SysNwkInfoReadReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_NWK_INFO_READ_REQ];
+}
+
+message SysResetInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_RESET_IND];
+	required ResetReasons reason = 2;
+	required uint32 transportrev = 3;
+	required uint32 product = 4;
+	required uint32 majorrel = 5;
+	required uint32 minorrel = 6;
+	required uint32 hwrev = 7;
+}
+
+message SysVersionRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_VERSION_RSP];
+	required uint32 transportrev = 2;
+	required uint32 product = 3;
+	required uint32 majorrel = 4;
+	required uint32 minorrel = 5;
+	required uint32 maintrel = 6;
+}
+
+message SysConfigReadRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_CONFIG_READ_RSP];
+	optional bool preconfigkeyenable = 2;
+	optional bool securitymodeenable = 3;
+	optional bool usedefaulttclk = 4;
+	optional uint32 pollrate = 5;
+	optional uint32 queuedpollrate = 6;
+	optional uint32 responsepollrate = 7;
+	optional uint32 apsackwaitduration = 8;
+	optional uint32 bindingtime = 9;
+	optional uint32 panid = 10;
+	optional uint32 pollfailureretries = 11;
+	optional uint32 indirectmsgtimeout = 12;
+	optional uint32 apsframeretries = 13;
+	optional uint32 bcastretries = 14;
+	optional uint32 passiveacktimeout = 15;
+	optional uint32 bcastdeliverytime = 16;
+	optional uint32 routeexpirytime = 17;
+	optional bytes userdesc = 18;
+	optional bytes preconfigkey = 19;
+	optional uint32 chanlist = 20;
+	optional uint32 multicastradius = 21;
+	optional fixed64 extendedpanid = 22;
+	optional fixed64 ieeeaddr = 23;
+	optional bool macrxonidle = 24;
+	optional bool snifferfeature = 25;
+	optional bool concentratorenable = 26;
+	optional uint32 concentratordisctime = 27;
+}
+
+message SysSetTxPowerRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_SET_TX_POWER_RSP];
+	required int32 txpower = 2;
+}
+
+message SysNwkInfoReadRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = SYS_NWK_INFO_READ_RSP];
+	required uint32 nwkaddr = 2;
+	required fixed64 ieeeaddr = 3;
+	required DevState devstate = 4;
+	required uint32 panid = 5;
+	required fixed64 extendedpanid = 6;
+	required uint32 coordaddr = 7;
+	required fixed64 coordextaddr = 8;
+	required DeviceTypes devtypes = 9;
+	required uint32 logicalchannel = 10;
+}
+
+message DevStartReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_START_REQ];
+	required uint32 startdelay = 2;
+}
+
+message DevNwkDiscReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_NWK_DISCOVERY_REQ];
+	required uint32 scanchannels = 2;
+	required uint32 scanduration = 3;
+}
+
+message DevJoinReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_JOIN_REQ];
+	required uint32 logicalchannel = 2;
+	required uint32 panid = 3;
+	required fixed64 extendedpanid = 4;
+	required uint32 chosenparent = 5;
+	required uint32 parentdepth = 6;
+	required uint32 stackprofile = 7;
+}
+
+message DevRejoinReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_REJOIN_REQ];
+	required bool unsecure = 2;
+	required uint32 logicalchannel = 3;
+	required fixed64 extendedpanid = 4;
+}
+
+message DevZDOCBReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_ZDO_CBS_REQ];
+	optional bool srcrtgindcb = 2;
+	optional bool concentratorindcb = 3;
+	optional bool nwkdisccnfcb = 4;
+	optional bool beaconnotindcb = 5;
+	optional bool joincnfcb = 6;
+	optional bool leavecnfcb = 7;
+	optional bool leaveindcb = 8;
+	optional bool nwkaddrrsp = 9;
+	optional bool ieeeaddrrsp = 10;
+	optional bool nodedescrsp = 11;
+	optional bool powerdescrsp = 12;
+	optional bool simpledescrsp = 13;
+	optional bool activeendpointrsp = 14;
+	optional bool matchdescrsp = 15;
+	optional bool complexdescrsp = 16;
+	optional bool userdescrsp = 17;
+	optional bool discoverycachersp = 18;
+	optional bool userdesccnf = 19;
+	optional bool serverdiscoveryrsp = 20;
+	optional bool enddevicetimeoutrsp = 21;
+	optional bool bindrsp = 22;
+	optional bool enddevicebindrsp = 23;
+	optional bool unbindrsp = 24;
+	optional bool mgmtnwkdiscrsp = 25;
+	optional bool mgmtlqirsp = 26;
+	optional bool mgmtrtgrsp = 27;
+	optional bool mgmtbindrsp = 28;
+	optional bool mgmtleaversp = 29;
+	optional bool mgmtdirectjoinrsp = 30;
+	optional bool mgmtpermitjoinrsp = 31;
+	optional bool mgmtnwkupdatenotify = 32;
+	optional bool deviceannounce = 33;
+	optional bool devstatechange = 34;
+	optional bool devjammerind = 35;
+	optional bool tcdeviceind = 36;
+	optional bool devpermitjoinind = 37;
+}
+
+message DevNwkRouteReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_NWK_ROUTE_REQ];
+	required uint32 dstaddr = 2;
+	optional bool mtoroute = 3;
+	optional bool mtonocache = 4;
+	optional bool multicast = 5;
+	required uint32 radius = 6;
+}
+
+message DevNwkCheckRouteReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_NWK_CHECK_ROUTE_REQ];
+	required uint32 dstaddr = 2;
+	required bool mtoroute = 3;
+}
+
+message DevJammerInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_JAMMER_IND];
+	required bool jammed = 2;
+}
+
+message DevPermitJoinInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_PERMIT_JOIN_IND];
+	required uint32 duration = 2;
+}
+
+message ApsRemoveGroup
+{
+	required ZStackCmdIDs cmdid = 1 [default = APS_REMOVE_GROUP];
+	required uint32 endpoint = 2;
+	required uint32 groupid = 3;
+}
+
+message ApsRemoveAllGroups
+{
+	required ZStackCmdIDs cmdid = 1 [default = APS_REMOVE_ALL_GROUPS];
+	required uint32 endpoint = 2;
+}
+
+message ApsFindAllGroupsReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = APS_FIND_ALL_GROUPS_REQ];
+	required uint32 endpoint = 2;
+}
+
+message ApsFindAllGroupsRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = APS_FIND_ALL_GROUPS_RSP];
+	repeated uint32 grouplist = 2;
+}
+
+message ApsFindGroupReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = APS_FIND_GROUP_REQ];
+	required uint32 endpoint = 2;
+	required uint32 groupid = 3;
+}
+
+message ApsFindGroupRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = APS_FIND_GROUP_RSP];
+	optional uint32 groupid = 2;
+	optional bytes name = 3;
+}
+
+message ApsAddGroup
+{
+	required ZStackCmdIDs cmdid = 1 [default = APS_ADD_GROUP];
+	required uint32 endpoint = 2;
+	required uint32 groupid = 3;
+	optional bytes name = 4;
+}
+
+message ApsCountAllGroups
+{
+	required ZStackCmdIDs cmdid = 1 [default = APS_COUNT_ALL_GROUPS];
+}
+
+message AfRegisterReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_REGISTER_REQ];
+	required uint32 endpoint = 2;
+	required SimpleDescriptor simpledesc = 3;
+	required NetworkLatency latencyreq = 4;
+}
+
+message AfUnRegisterReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_UNREGISTER_REQ];
+	required uint32 endpoint = 2;
+}
+
+message AfDataReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_DATA_REQ];
+	required AFAddr dstaddr = 2;
+	repeated uint32 relaylist = 3;
+	required uint32 srcendpoint = 4;
+	required uint32 clusterid = 5;
+	required uint32 transid = 6;
+	required TransOptions options = 7;
+	required uint32 radius = 8;
+	required bytes payload = 9;
+}
+
+message AfInterPanCtlReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_INTERPAN_CTL_REQ];
+	required bool enable = 2;
+	optional uint32 channel = 3;
+	optional uint32 endpoint = 4;
+	optional uint32 panid = 5;
+}
+
+message AfConfigGetReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_INTERPAN_CTL_REQ];
+	required uint32 endpoint = 2;
+}
+
+message AfConfigSetReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_CONFIG_SET_REQ];
+	required uint32 endpoint = 2;
+	required uint32 framedelay = 3;
+	required uint32 windowsize = 4;
+}
+
+message AfConfigGetRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_CONFIG_GET_RSP];
+	required uint32 endpoint = 2;
+	required uint32 framedelay = 3;
+	required uint32 windowsize = 4;
+}
+
+message AfDataConfirmInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_DATA_CONFIRM_IND];
+	required ZStatusValues status = 2;
+	required uint32 endpoint = 3;
+	required uint32 transid = 4;
+}
+
+message AfIncomingMsgInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_INCOMING_MSG_IND];
+	required AFAddr srcaddr = 2;
+	required uint32 groupid = 3;
+	required uint32 clusterid = 4;
+	required uint32 macdestaddr = 5;
+	required uint32 endpoint = 6;
+	required bool wasbroadcast = 7;
+	required bool securityuse = 8;
+	required uint32 linkquality = 9;
+	required uint32 correlation = 10;
+	required int32 rssi = 11;
+	required uint32 timestamp = 12;
+	required uint32 nwkseqnum = 13;
+	required uint32 macsrcaddr = 14;
+	required uint32 transseqnum = 15;
+	required bytes payload = 16;
+}
+
+message AfReflectErrorInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = AF_REFLECT_ERROR_IND];
+	required ZStatusValues status = 2;
+	required AFAddr dstaddr = 3;
+	required uint32 transid = 4;
+}
+
+message ZdoNwkAddrReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_NWK_ADDR_REQ];
+	required fixed64 ieeeaddr = 2;
+	required NwkAddrReqType type = 3;
+	required uint32 startindex = 4;
+}
+
+message ZdoIeeeAddrReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_IEEE_ADDR_REQ];
+	required uint32 nwkaddr = 2;
+	required NwkAddrReqType type = 3;
+	required uint32 startindex = 4;
+}
+
+message ZdoNodeDescReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_NODE_DESC_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 nwkaddrofinterest = 3;
+}
+
+message ZdoPowerDescReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_POWER_DESC_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 nwkaddrofinterest = 3;
+}
+
+message ZdoSimpleDescReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_SIMPLE_DESC_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 nwkaddrofinterest = 3;
+	required uint32 endpoint = 4;
+}
+
+message ZdoActiveEndpointReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_ACTIVE_ENDPOINT_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 nwkaddrofinterest = 3;
+}
+
+message ZdoMatchDescReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MATCH_DESC_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 nwkaddrofinterest = 3;
+	required uint32 profileid = 4;
+	repeated uint32 inputclusters = 5;
+	repeated uint32 outputclusters = 6;
+}
+
+message ZdoComplexDescReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_COMPLEX_DESC_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 nwkaddrofinterest = 3;
+}
+
+message ZdoUserDescReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_USER_DESC_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 nwkaddrofinterest = 3;
+}
+
+message ZdoDeviceAnnounceReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_DEVICE_ANNOUNCE_REQ];
+	required uint32 nwkaddr = 2;
+	required fixed64 ieeeaddr = 3;
+	required CapabilityInfo capabilities = 4;
+}
+
+message ZdoUserDescSetReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_USER_DESCR_SET_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 nwkaddrofinterest = 3;
+	required bytes userdescriptor = 4;
+}
+
+message ZdoServerDiscReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_SERVER_DISC_REQ];
+	required ServerCapabilities servermask = 2;
+}
+
+message ZdoEndDeviceBindReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_END_DEVICE_BIND_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 localcoordinator = 3;
+	required fixed64 ieee = 4;
+	required uint32 endpoint = 5;
+	required uint32 profileid = 6;
+	repeated uint32 inputclusters = 7;
+	repeated uint32 outputclusters = 8;
+}
+
+message ZdoBindReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_BIND_REQ];
+	required uint32 nwkaddr = 2;
+	required BindRec bindinfo = 3;
+}
+
+message ZdoUnbindReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_UNBIND_REQ];
+	required uint32 nwkaddr = 2;
+	required BindRec bindinfo = 3;
+}
+
+message ZdoMgmtNwkDiscReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_NWK_DISC_REQ];
+	required uint32 nwkaddr = 2;
+	required uint32 scanchannels = 3;
+	required uint32 scanduration = 4;
+	required uint32 startindex = 5;
+}
+
+message ZdoMgmtLqiReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_LQI_REQ];
+	required uint32 nwkaddr = 2;
+	required uint32 startindex = 3;
+}
+
+message ZdoMgmtRtgReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_RTG_REQ];
+	required uint32 nwkaddr = 2;
+	required uint32 startindex = 3;
+}
+
+message ZdoMgmtBindReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_BIND_REQ];
+	required uint32 nwkaddr = 2;
+	required uint32 startindex = 3;
+}
+
+message ZdoMgmtLeaveReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_LEAVE_REQ];
+	required uint32 nwkaddr = 2;
+	required fixed64 deviceaddress = 3;
+	required LeaveOptions options = 4;
+}
+
+message ZdoMgmtDirectJoinReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_DIRECT_JOIN_REQ];
+	required uint32 nwkaddr = 2;
+	required fixed64 deviceaddress = 3;
+	required CapabilityInfo capinfo = 4;
+}
+
+message ZdoMgmtPermitJoinReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_PERMIT_JOIN_REQ];
+	required uint32 nwkaddr = 2;
+	required uint32 duration = 3;
+	required bool tcsignificance = 4;
+}
+
+message ZdoMgmtNwkUpdateReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_NWK_UPDATE_REQ];
+	required uint32 dstaddr = 2;
+	required uint32 channelmask = 3;
+	required uint32 scanduration = 4;
+	required uint32 scancount = 5;
+	required uint32 nwkupdateid = 6;
+	required uint32 nwkmgraddr = 7;
+}
+
+message ZdoNwkAddrRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_NWK_ADDR_RSP];
+	required ZdpStatus status = 2;
+	required fixed64 ieeeaddr = 3;
+	required uint32 nwkaddr = 4;
+	required uint32 startindex = 5;
+	repeated uint32 assocdevlist = 6;
+}
+
+message ZdoIeeeAddrRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_IEEE_ADDR_RSP];
+	required ZdpStatus status = 2;
+	required fixed64 ieeeaddr = 3;
+	required uint32 nwkaddr = 4;
+	required uint32 startindex = 5;
+	repeated uint32 assocdevlist = 6;
+}
+
+message ZdoNodeDescRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_NODE_DESC_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 nwkaddrofinterest = 4;
+	required NodeDescriptor nodedesc = 5;
+}
+
+message ZdoPowerDescRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_POWER_DESC_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 nwkaddrofinterest = 4;
+	required PowerDescriptor powerdesc = 5;
+}
+
+message ZdoSimpleDescRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_SIMPLE_DESC_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 nwkaddrofinterest = 4;
+	required SimpleDescriptor simpledesc = 5;
+}
+
+message ZdoActiveEndpointsRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_ACTIVE_EP_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 nwkaddrofinterest = 4;
+	repeated uint32 activeeplist = 5;
+}
+
+message ZdoMatchDescRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MATCH_DESC_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 nwkaddrofinterest = 4;
+	repeated uint32 matchlist = 5;
+}
+
+message ZdoUserDescRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_USER_DESC_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 nwkaddrofinterest = 4;
+	required bytes desc = 5;
+}
+
+message ZdoServerDiscoveryRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_SERVER_DISC_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required ServerCapabilities servercap = 4;
+}
+
+message ZdoEndDeviceTimeoutRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_END_DEVICE_TIMEOUT_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 timeout = 4;
+}
+
+message ZdoBindRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_BIND_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+}
+
+message ZdoEndDeviceBindRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_END_DEVICE_BIND_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+}
+
+message ZdoUnbindRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_UNBIND_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+}
+
+message ZdoDeviceAnnounceInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_DEVICE_ANNOUNCE];
+	required uint32 srcaddr = 2;
+	required uint32 devaddr = 3;
+	required fixed64 devextaddr = 4;
+	required CapabilityInfo capinfo = 5;
+}
+
+message ZdoMgmtNwkDiscRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_NWK_DISC_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 networkcount = 4;
+	required uint32 startindex = 5;
+	repeated NwkDiscItem netlist = 6;
+}
+
+message ZdoMgmtLqiRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_LQI_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 neighborlqientries = 4;
+	required uint32 startindex = 5;
+	repeated NeighborLqiItem lqilist = 6;
+}
+
+message ZdoMgmtRtgRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_RTG_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 rtgentries = 4;
+	required uint32 startindex = 5;
+	repeated RtgItem rtglist = 6;
+}
+
+message ZdoMgmtBindRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_BIND_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 bindentries = 4;
+	required uint32 startindex = 5;
+	repeated BindItem bindlist = 6;
+}
+
+message ZdoMgmtLeaveRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_LEAVE_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+}
+
+message ZdoMgmtDirectJoinRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_DIRECT_JOIN_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+}
+
+message ZdoMgmtPermitJoinRspInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_PERMIT_JOIN_RSP];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+}
+
+message ZdoMgmtNwkUpdateNotifyInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_MGMT_NWK_UPDATE_NOTIFY];
+	required uint32 srcaddr = 2;
+	required ZdpStatus status = 3;
+	required uint32 scannedchannels = 4;
+	required uint32 totaltrans = 5;
+	required uint32 transfails = 6;
+	repeated uint32 energyvalueslist = 7;
+}
+
+message ZdoTcDeviceInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_TC_DEVICE_IND];
+	required uint32 nwkaddr = 2;
+	required fixed64 extendedaddr = 3;
+	required uint32 parentaddr = 4;
+}
+
+message ZdoSrcRtgInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_SRC_RTG_IND];
+	required uint32 srcaddr = 2;
+	required uint32 relaycnt = 3;
+	repeated uint32 relay = 4;
+}
+
+message ZdoConcentratorInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_CONCENTRATOR_IND];
+	required uint32 nwkaddr = 2;
+	required uint32 pktcost = 3;
+	required fixed64 ieeeaddr = 4;
+}
+
+message ZdoNwkDiscCnf
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_NWK_DISC_CNF];
+	required uint32 status = 2;
+}
+
+message ZdoBeaconNotifyInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_BEACON_NOTIFY_IND];
+	required uint32 sourceaddr = 2;
+	required uint32 panid = 3;
+	required uint32 logicalchannel = 4;
+	required bool permitjoining = 5;
+	required bool routercapacity = 6;
+	required bool devicecapacity = 7;
+	required uint32 protocolversion = 8;
+	required uint32 stackprofile = 9;
+	required uint32 lqi = 10;
+	required uint32 depth = 11;
+	required uint32 updateid = 12;
+	required fixed64 extendedpanid = 13;
+}
+
+message ZdoJoinCnf
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_JOIN_CNF];
+	required ZStatusValues status = 2;
+	required uint32 devaddr = 3;
+	required uint32 parentaddr = 4;
+}
+
+message ZdoLeaveCnf
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_LEAVE_CNF];
+	required uint32 dstaddr = 2;
+	required fixed64 extendedaddr = 3;
+	required bool removechildren = 4;
+	required bool rejoin = 5;
+	required uint32 status = 6;
+}
+
+message ZdoLeaveInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = ZDO_LEAVE_IND];
+	required uint32 srcaddr = 2;
+	required fixed64 extendedaddr = 3;
+	required uint32 request = 4;
+	required bool removechildren = 5;
+	required bool rejoin = 6;
+}
+
+message DevStateChangeInd
+{
+	required ZStackCmdIDs cmdid = 1 [default = DEV_STATE_CHANGE_IND];
+	required DevState state = 2;
+}
+
+message SecNwkKeyGetReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_NWK_KEY_GET_REQ];
+	required bool activekey = 2;
+}
+
+message SecNwkKeySetReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_NWK_KEY_SET_REQ];
+	required bool activekey = 2;
+	required uint32 seqnum = 3;
+	optional bytes key = 4;
+}
+
+message SecNwkKeyUpdateReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_NWK_KEY_UPDATE_REQ];
+	required uint32 seqnum = 2;
+	required uint32 dstaddr = 3;
+}
+
+message SecNwkKeySwitchReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_NWK_KEY_SWITCH_REQ];
+	required uint32 seqnum = 2;
+	required uint32 dstaddr = 3;
+}
+
+message SecApsLinkKeyGetReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_APS_LINKKEY_GET_REQ];
+	required bool tclinkkey = 2;
+	required fixed64 ieeeaddr = 3;
+}
+
+message SecApsLinkKeySetReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_APS_LINKKEY_SET_REQ];
+	required bool tclinkkey = 2;
+	optional uint32 shortaddr = 3;
+	required fixed64 ieeeaddr = 4;
+	required bytes key = 5;
+	optional uint32 txfrmcntr = 6;
+	optional uint32 rxfrmcntr = 7;
+}
+
+message SecApsLinkKeyRemoveReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_APS_LINKKEY_REMOVE_REQ];
+	required bool tclinkkey = 2;
+	required fixed64 ieeeaddr = 3;
+}
+
+message SecApsRemoveReq
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_APS_REMOVE_REQ];
+	required uint32 parentaddr = 2;
+	required uint32 nwkaddr = 3;
+	required fixed64 extaddr = 4;
+}
+
+message SecNwkKeyGetRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_NWK_KEY_GET_RSP];
+	required ZStatusValues status = 2;
+	required bool activekey = 3;
+	required uint32 seqnum = 4;
+	required bytes key = 5;
+}
+
+message SecApsLinkKeyGetRsp
+{
+	required ZStackCmdIDs cmdid = 1 [default = SEC_APS_LINKKEY_GET_RSP];
+	required ZStatusValues status = 2;
+	required bool tclinkkey = 3;
+	required fixed64 ieeeaddr = 4;
+	required bytes key = 5;
+	required uint32 txfrmcntr = 6;
+	required uint32 rxfrmcntr = 7;
+}
+
+message ZstackDefaultRsp
+{
+	required ZStackCmdIDs cmdid = 1;
+	required ZStatusValues status = 2;
+}
+

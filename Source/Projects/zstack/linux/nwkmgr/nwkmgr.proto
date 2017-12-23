@@ -1,0 +1,394 @@
+enum ZStackNwkMgrSysIdT
+{
+	RPC_SYS_PB_NWK_MGR = 18;
+}
+
+enum NwkMgrCmdIdT
+{
+	ZIGBEE_GENERIC_CNF = 0;
+	ZIGBEE_GENERIC_RSP_IND = 1;
+	NWK_ZIGBEE_SYSTEM_RESET_REQ = 2;
+	NWK_ZIGBEE_SYSTEM_RESET_CNF = 3;
+	NWK_ZIGBEE_SYSTEM_SELF_SHUTDOWN_REQ = 4;
+	NWK_SET_ZIGBEE_POWER_MODE_REQ = 5;
+	NWK_SET_ZIGBEE_POWER_MODE_CNF = 6;
+	NWK_GET_LOCAL_DEVICE_INFO_REQ = 7;
+	NWK_GET_LOCAL_DEVICE_INFO_CNF = 8;
+	NWK_ZIGBEE_NWK_READY_IND = 9;
+	NWK_ZIGBEE_NWK_INFO_REQ = 10;
+	NWK_ZIGBEE_NWK_INFO_CNF = 11;
+	NWK_SET_PERMIT_JOIN_REQ = 12;
+	NWK_MANAGE_PERIODIC_MTO_ROUTE_REQ = 13;
+	NWK_GET_NEIGHBOR_TABLE_REQ = 14;
+	NWK_GET_NEIGHBOR_TABLE_RSP_IND = 15;
+	NWK_GET_ROUTING_TABLE_REQ = 16;
+	NWK_GET_ROUTING_TABLE_RSP_IND = 17;
+	NWK_CHANGE_NWK_KEY_REQ = 18;
+	NWK_GET_NWK_KEY_REQ = 19;
+	NWK_GET_NWK_KEY_CNF = 20;
+	NWK_ZIGBEE_DEVICE_IND = 21;
+	NWK_GET_DEVICE_LIST_REQ = 22;
+	NWK_GET_DEVICE_LIST_CNF = 23;
+	NWK_DEVICE_LIST_MAINTENANCE_REQ = 24;
+	NWK_REMOVE_DEVICE_REQ = 25;
+	NWK_SET_BINDING_ENTRY_REQ = 26;
+	NWK_SET_BINDING_ENTRY_RSP_IND = 27;
+}
+
+enum NwkResetModeT
+{
+	SOFT_RESET = 0;
+	HARD_RESET = 1;
+}
+
+enum NwkPowerModeT
+{
+	SLEEP = 0;
+	WAKEUP = 1;
+}
+
+enum NwkNetworkStatusT
+{
+	NWK_DOWN = 0;
+	NWK_UP = 1;
+}
+
+enum NwkPermitJoinTypeT
+{
+	PERMIT_LOCAL = 0;
+	PERMIT_NETWORK = 1;
+	PERMIT_ALL = 2;
+}
+
+enum NwkMtoRouteModeT
+{
+	MTO_ROUTE_START = 0;
+	MTO_ROUTE_STOP = 1;
+}
+
+enum NwkDeviceStatusT
+{
+	DEVICE_OFF_LINE = 0;
+	DEVICE_ON_LINE = 1;
+	DEVICE_REMOVED = 2;
+	DEVICE_NA = 255;
+}
+
+enum NwkAddressTypeT
+{
+	UNICAST = 0;
+	GROUPCAST = 1;
+	BROADCAST = 2;
+	SELF = 3;
+}
+
+enum NwkStatusT
+{
+	STATUS_SUCCESS = 0;
+	STATUS_FAILURE = 1;
+	STATUS_BUSY = 2;
+	STATUS_INVALID_PARAMETER = 3;
+	STATUS_TIMEOUT = 4;
+}
+
+enum NwkLeaveModeT
+{
+	LEAVE = 0;
+	LEAVE_REJOIN = 1;
+}
+
+enum NwkBindingModeT
+{
+	BIND = 0;
+	UNBIND = 1;
+}
+
+enum NwkDeviceTypeT
+{
+	ZIGBEE_COORDINATOR = 0;
+	ZIGBEE_ROUTER = 1;
+	ZIGBEE_END_DEVICE = 2;
+	UNKNOWN_DEVICE_TYPE = 3;
+}
+
+enum NwkRxOnWhenIdleT
+{
+	RX_IS_OFF = 0;
+	RX_IS_ON = 1;
+	UNKNOWN_RX_STATE = 2;
+}
+
+enum NwkRelationshipT
+{
+	PARENT = 0;
+	CHILD = 1;
+	SIBLING = 2;
+	NONE_OF_THE_ABOVE = 3;
+	PREVIOUS_CHILD = 4;
+}
+
+enum NwkPermitJoiningStatusT
+{
+	NOT_ACCEPTING = 0;
+	ACCEPTS = 1;
+	UNKNOWN_STATUS = 2;
+}
+
+enum NwkRouteStatusT
+{
+	ROUTE_ACTIVE = 0;
+	ROUTE_DISCOVERY_UNDERWAY = 1;
+	ROUTE_DISCOVERY_FAILED = 2;
+	REOUT_INACTIVE = 3;
+}
+
+message NwkAddressStructT
+{
+	required NwkAddressTypeT addresstype = 1;
+	optional fixed64 ieeeaddr = 2;
+	optional uint32 groupaddr = 3;
+	optional uint32 broadcastaddr = 4;
+	optional uint32 endpointid = 5;
+}
+
+message NwkSimpleDescriptorT
+{
+	required uint32 endpointid = 1;
+	required uint32 profileid = 2;
+	required uint32 deviceid = 3;
+	required uint32 devicever = 4;
+	repeated uint32 inputclusters = 5;
+	repeated uint32 outputclusters = 6;
+}
+
+message NwkBindRecT
+{
+	required NwkAddressStructT srcaddr = 1;
+	required uint32 clusterid = 2;
+	required NwkAddressStructT dstaddr = 3;
+}
+
+message NwkDeviceInfoT
+{
+	required uint32 networkaddress = 1;
+	required fixed64 ieeeaddress = 2;
+	optional fixed64 parentieeeaddress = 3;
+	required uint32 manufacturerid = 4;
+	repeated NwkSimpleDescriptorT simpledesclist = 5;
+	required NwkDeviceStatusT devicestatus = 6;
+}
+
+message NwkNeighborInfoT
+{
+	required fixed64 extendedpanid = 1;
+	required fixed64 extendedaddress = 2;
+	required uint32 networkaddress = 3;
+	required NwkDeviceTypeT devicetype = 4;
+	required NwkRxOnWhenIdleT idle = 5;
+	required NwkRelationshipT relation = 6;
+	required NwkPermitJoiningStatusT permitjoining = 7;
+	required uint32 depth = 8;
+	required uint32 lqi = 9;
+}
+
+message NwkRoutingInfoT
+{
+	required uint32 dstaddr = 1;
+	required NwkRouteStatusT status = 2;
+	required uint32 nexthop = 3;
+}
+
+message NwkZigbeeGenericCnf
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = ZIGBEE_GENERIC_CNF];
+	required NwkStatusT status = 2;
+	optional uint32 sequencenumber = 3;
+}
+
+message NwkZigbeeGenericRspInd
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = ZIGBEE_GENERIC_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required NwkStatusT status = 3;
+}
+
+message NwkZigbeeSystemResetReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_ZIGBEE_SYSTEM_RESET_REQ];
+	required NwkResetModeT mode = 2;
+}
+
+message NwkZigbeeSystemResetCnf
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_ZIGBEE_SYSTEM_RESET_CNF];
+	required NwkStatusT status = 2;
+	required NwkResetModeT resetmode = 3;
+}
+
+message NwkZigbeeSystemSelfShutdownReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_ZIGBEE_SYSTEM_SELF_SHUTDOWN_REQ];
+}
+
+message NwkSetZigbeePowerModeReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_SET_ZIGBEE_POWER_MODE_REQ];
+	required NwkPowerModeT powermode = 2;
+}
+
+message NwkSetZigbeePowerModeCnf
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_SET_ZIGBEE_POWER_MODE_CNF];
+	required NwkStatusT status = 2;
+	required NwkPowerModeT powermode = 3;
+}
+
+message NwkGetLocalDeviceInfoReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_LOCAL_DEVICE_INFO_REQ];
+}
+
+message NwkGetLocalDeviceInfoCnf
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_LOCAL_DEVICE_INFO_CNF];
+	required NwkDeviceInfoT deviceinfolist = 2;
+}
+
+message NwkZigbeeNwkReadyInd
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_ZIGBEE_NWK_READY_IND];
+	required uint32 nwkchannel = 2;
+	required uint32 panid = 3;
+	required fixed64 extpanid = 4;
+}
+
+message NwkZigbeeNwkInfoReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_ZIGBEE_NWK_INFO_REQ];
+}
+
+message NwkZigbeeNwkInfoCnf
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_ZIGBEE_NWK_INFO_CNF];
+	required NwkNetworkStatusT status = 2;
+	required uint32 nwkchannel = 3;
+	required uint32 panid = 4;
+	required fixed64 extpanid = 5;
+}
+
+message NwkSetPermitJoinReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_SET_PERMIT_JOIN_REQ];
+	required NwkPermitJoinTypeT permitjoin = 2;
+	required uint32 permitjointime = 3;
+}
+
+message NwkManagePeriodicMtoRouteReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_MANAGE_PERIODIC_MTO_ROUTE_REQ];
+	required NwkMtoRouteModeT mode = 2;
+}
+
+message NwkGetNeighborTableReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_NEIGHBOR_TABLE_REQ];
+	required NwkAddressStructT dstaddr = 2;
+	required uint32 startindex = 3;
+}
+
+message NwkGetNeighborTableRspInd
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_NEIGHBOR_TABLE_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required NwkStatusT status = 3;
+	required NwkAddressStructT srcaddr = 4;
+	required uint32 neighbortableentries = 5;
+	required uint32 startindex = 6;
+	repeated NwkNeighborInfoT neighborlist = 7;
+}
+
+message NwkGetRoutingTableReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_ROUTING_TABLE_REQ];
+	required NwkAddressStructT dstaddr = 2;
+	required uint32 startindex = 3;
+}
+
+message NwkGetRoutingTableRspInd
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_ROUTING_TABLE_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required NwkStatusT status = 3;
+	required NwkAddressStructT srcaddr = 4;
+	required uint32 routingtableentries = 5;
+	required uint32 startindex = 6;
+	repeated NwkRoutingInfoT routinglist = 7;
+}
+
+message NwkChangeNwkKeyReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_CHANGE_NWK_KEY_REQ];
+	optional bytes newkey = 2;
+}
+
+message NwkGetNwkKeyReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_NWK_KEY_REQ];
+}
+
+message NwkGetNwkKeyCnf
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_NWK_KEY_CNF];
+	required NwkStatusT status = 2;
+	required bytes newkey = 3;
+}
+
+message NwkZigbeeDeviceInd
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_ZIGBEE_DEVICE_IND];
+	required NwkDeviceInfoT deviceinfo = 2;
+}
+
+message NwkGetDeviceListReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_DEVICE_LIST_REQ];
+	optional NwkAddressStructT dstaddr = 2;
+}
+
+message NwkGetDeviceListCnf
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_GET_DEVICE_LIST_CNF];
+	required NwkStatusT status = 2;
+	repeated NwkDeviceInfoT devicelist = 3;
+}
+
+message NwkDeviceListMaintenanceReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_DEVICE_LIST_MAINTENANCE_REQ];
+	optional NwkAddressStructT dstaddr = 2;
+}
+
+message NwkRemoveDeviceReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_REMOVE_DEVICE_REQ];
+	required NwkAddressStructT dstaddr = 2;
+	required NwkLeaveModeT leavemode = 3;
+}
+
+message NwkSetBindingEntryReq
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_SET_BINDING_ENTRY_REQ];
+	required NwkAddressStructT srcaddr = 2;
+	required uint32 clusterid = 3;
+	required NwkAddressStructT dstaddr = 4;
+	required NwkBindingModeT bindingmode = 5;
+}
+
+message NwkSetBindingEntryRspInd
+{
+	required NwkMgrCmdIdT cmdid = 1 [default = NWK_SET_BINDING_ENTRY_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required NwkStatusT status = 3;
+	required NwkAddressStructT srcaddr = 4;
+}
+

@@ -1,0 +1,861 @@
+enum ZStackGwSysIdT
+{
+	RPC_SYS_PB_GW = 19;
+}
+
+enum GwCmdIdT
+{
+	ZIGBEE_GENERIC_CNF = 0;
+	ZIGBEE_GENERIC_RSP_IND = 1;
+	GW_ADD_GROUP_REQ = 2;
+	GW_GET_GROUP_MEMBERSHIP_REQ = 3;
+	GW_GET_GROUP_MEMBERSHIP_RSP_IND = 4;
+	GW_REMOVE_FROM_GROUP_REQ = 5;
+	GW_STORE_SCENE_REQ = 6;
+	GW_REMOVE_SCENE_REQ = 7;
+	GW_RECALL_SCENE_REQ = 8;
+	GW_GET_SCENE_MEMBERSHIP_REQ = 9;
+	GW_GET_SCENE_MEMBERSHIP_RSP_IND = 10;
+	GW_SLEEPY_DEVICE_PACKET_PENDING_REQ = 11;
+	GW_SLEEPY_DEVICE_CHECK_IN_IND = 12;
+	GW_ATTRIBUTE_CHANGE_IND = 13;
+	GW_GET_DEVICE_ATTRIBUTE_LIST_REQ = 14;
+	GW_GET_DEVICE_ATTRIBUTE_LIST_RSP_IND = 15;
+	GW_READ_DEVICE_ATTRIBUTE_REQ = 16;
+	GW_READ_DEVICE_ATTRIBUTE_RSP_IND = 17;
+	GW_WRITE_DEVICE_ATTRIBUTE_REQ = 18;
+	GW_WRITE_DEVICE_ATTRIBUTE_RSP_IND = 19;
+	GW_SET_ATTRIBUTE_REPORTING_REQ = 20;
+	GW_SET_ATTRIBUTE_REPORTING_RSP_IND = 21;
+	GW_ATTRIBUTE_REPORTING_IND = 22;
+	GW_SEND_ZCL_FRAME_REQ = 23;
+	GW_ZCL_FRAME_RECEIVE_IND = 24;
+	GW_ALARM_IND = 25;
+	GW_ALARM_RESET_REQ = 26;
+	DEV_ZONE_ENROLLMENT_REQ_IND = 27;
+	DEV_ZONE_ENROLLMENT_RSP = 28;
+	DEV_ZONE_STATUS_CHANGE_IND = 29;
+	DEV_ACE_ARM_REQ_IND = 30;
+	DEV_ACE_ARM_RSP = 31;
+	DEV_ACE_BYPASS_IND = 32;
+	DEV_ACE_EMERGENCY_CONDITION_IND = 33;
+	DEV_ACE_GET_ZONE_ID_MAP_REQ_IND = 34;
+	DEV_ACE_GET_ZONE_ID_MAP_RSP = 35;
+	DEV_ACE_GET_ZONE_INFORMATION_REQ_IND = 36;
+	DEV_ACE_GET_ZONE_INFORMATION_RSP = 37;
+	DEV_SET_IDENTIFY_MODE_REQ = 38;
+	DEV_SET_ONOFF_STATE_REQ = 39;
+	DEV_SET_LEVEL_REQ = 40;
+	DEV_GET_LEVEL_REQ = 41;
+	DEV_GET_LEVEL_RSP_IND = 42;
+	DEV_GET_ONOFF_STATE_REQ = 43;
+	DEV_GET_ONOFF_STATE_RSP_IND = 44;
+	DEV_SET_COLOR_REQ = 45;
+	DEV_GET_COLOR_REQ = 46;
+	DEV_GET_COLOR_RSP_IND = 47;
+	DEV_GET_TEMP_REQ = 48;
+	DEV_GET_TEMP_RSP_IND = 49;
+	DEV_GET_POWER_REQ = 50;
+	DEV_GET_POWER_RSP_IND = 51;
+	DEV_GET_HUMIDITY_REQ = 52;
+	DEV_GET_HUMIDITY_RSP_IND = 53;
+	DEV_SET_DOOR_LOCK_REQ = 54;
+	DEV_SET_DOOR_LOCK_RSP_IND = 55;
+	DEV_GET_DOOR_LOCK_STATE_REQ = 56;
+	DEV_GET_DOOR_LOCK_STATE_RSP_IND = 57;
+	DEV_THERMOSTAT_SETPOINT_CHANGE_REQ = 58;
+	DEV_WINDOW_COVERING_ACTION_REQ = 59;
+}
+
+enum GwAddressTypeT
+{
+	UNICAST = 0;
+	GROUPCAST = 1;
+	BROADCAST = 2;
+	NONE = 3;
+}
+
+enum GwDeviceStatusT
+{
+	DEVICE_OFFLINE = 0;
+	DEVICE_ONLINE = 1;
+	DEVICE_REMOVED = 2;
+	NOT_APPLICABLE = 255;
+}
+
+enum GwZclAttributeDataTypesT
+{
+	ZCL_DATATYPE_NO_DATA = 0;
+	ZCL_DATATYPE_DATA8 = 8;
+	ZCL_DATATYPE_DATA16 = 9;
+	ZCL_DATATYPE_DATA24 = 10;
+	ZCL_DATATYPE_DATA32 = 11;
+	ZCL_DATATYPE_DATA40 = 12;
+	ZCL_DATATYPE_DATA48 = 13;
+	ZCL_DATATYPE_DATA56 = 14;
+	ZCL_DATATYPE_DATA64 = 15;
+	ZCL_DATATYPE_BOOLEAN = 16;
+	ZCL_DATATYPE_BITMAP8 = 24;
+	ZCL_DATATYPE_BITMAP16 = 25;
+	ZCL_DATATYPE_BITMAP24 = 26;
+	ZCL_DATATYPE_BITMAP32 = 27;
+	ZCL_DATATYPE_BITMAP40 = 28;
+	ZCL_DATATYPE_BITMAP48 = 29;
+	ZCL_DATATYPE_BITMAP56 = 30;
+	ZCL_DATATYPE_BITMAP64 = 31;
+	ZCL_DATATYPE_UINT8 = 32;
+	ZCL_DATATYPE_UINT16 = 33;
+	ZCL_DATATYPE_UINT24 = 34;
+	ZCL_DATATYPE_UINT32 = 35;
+	ZCL_DATATYPE_UINT40 = 36;
+	ZCL_DATATYPE_UINT48 = 37;
+	ZCL_DATATYPE_UINT56 = 38;
+	ZCL_DATATYPE_UINT64 = 39;
+	ZCL_DATATYPE_INT8 = 40;
+	ZCL_DATATYPE_INT16 = 41;
+	ZCL_DATATYPE_INT24 = 42;
+	ZCL_DATATYPE_INT32 = 43;
+	ZCL_DATATYPE_INT40 = 44;
+	ZCL_DATATYPE_INT48 = 45;
+	ZCL_DATATYPE_INT56 = 46;
+	ZCL_DATATYPE_INT64 = 47;
+	ZCL_DATATYPE_ENUM8 = 48;
+	ZCL_DATATYPE_ENUM16 = 49;
+	ZCL_DATATYPE_SEMI_PREC = 56;
+	ZCL_DATATYPE_SINGLE_PREC = 57;
+	ZCL_DATATYPE_DOUBLE_PREC = 58;
+	ZCL_DATATYPE_OCTET_STR = 65;
+	ZCL_DATATYPE_CHAR_STR = 66;
+	ZCL_DATATYPE_LONG_OCTET_STR = 67;
+	ZCL_DATATYPE_LONG_CHAR_STR = 68;
+	ZCL_DATATYPE_ARRAY = 72;
+	ZCL_DATATYPE_STRUCT = 76;
+	ZCL_DATATYPE_SET = 80;
+	ZCL_DATATYPE_BAG = 81;
+	ZCL_DATATYPE_TOD = 224;
+	ZCL_DATATYPE_DATE = 225;
+	ZCL_DATATYPE_UTC = 226;
+	ZCL_DATATYPE_CLUSTER_ID = 232;
+	ZCL_DATATYPE_ATTR_ID = 233;
+	ZCL_DATATYPE_BAC_OID = 234;
+	ZCL_DATATYPE_IEEE_ADDR = 240;
+	ZCL_DATATYPE_128_BIT_SEC_KEY = 241;
+	ZCL_DATATYPE_UNKNOWN = 255;
+}
+
+enum GwQualityOfServiceT
+{
+	APS_NOT_ACK = 0;
+	APS_ACK = 1;
+}
+
+enum GwSecurityOptionsT
+{
+	APS_SECURITY_DISABLED = 0;
+	APS_SECURITY_ENABLED = 1;
+}
+
+enum GwFrameTypeT
+{
+	FRAME_VALID_ACCROSS_PROFILE = 0;
+	FRAME_CLUSTER_SPECIFIC = 1;
+}
+
+enum GwMfrSpecificFlagT
+{
+	NON_MFR_SPECIFIC = 0;
+	MFR_SPECIFIC = 1;
+}
+
+enum GwClientServerDirT
+{
+	CLIENT_TO_SERVER = 0;
+	SERVER_TO_CLIENT = 1;
+}
+
+enum GwDisableDefaultRspT
+{
+	DEFAULT_RSP_ENABLED = 0;
+	DEFAULT_RSP_DISABLED = 1;
+}
+
+enum GwStatusT
+{
+	STATUS_SUCCESS = 0;
+	STATUS_FAILURE = 1;
+	STATUS_BUSY = 2;
+	STATUS_INVALID_PARAMETER = 3;
+	STATUS_TIMEOUT = 4;
+}
+
+enum GwOnOffStateT
+{
+	OFF_STATE = 0;
+	ON_STATE = 1;
+	TOGGLE_STATE = 2;
+}
+
+enum GwOnOffStateValueT
+{
+	OFF = 0;
+	ON = 1;
+}
+
+enum GwLockModeT
+{
+	LOCK_MODE_LOCK = 0;
+	LOCK_MODE_UNLOCK = 1;
+}
+
+enum GwLockStateT
+{
+	LOCK_NOT_FULLY_LOCKED = 0;
+	LOCK_LOCKED = 1;
+	LOCK_UNLOCKED = 2;
+}
+
+enum GwDoorStateT
+{
+	DOOR_OPEN = 0;
+	DOOR_CLOSED = 1;
+	DOOR_JAMMED = 2;
+	DOOR_FORCED_OPEN = 3;
+}
+
+enum GwZoneTypeT
+{
+	STANDARD_CIE = 0;
+	MOTION_SENSOR = 13;
+	CONTACT_SW = 21;
+	FIRE_SENSOR = 40;
+	WATER_SENSOR = 42;
+	GAS_SENSOR = 43;
+	PERSONAL_EMERGENCY_DEVICE = 44;
+	VIBRATION_MOVEMENT_SENSOR = 45;
+	REMOTE_CONTROL = 271;
+	KEY_FOB = 277;
+	KEY_PAD = 541;
+	STANDARD_WARNING_DEVICE = 549;
+	ZONE_UNALLOCATED = 65535;
+}
+
+enum GwEnrollRspCodeT
+{
+	ZONE_ENROLL_SUCCESS = 0;
+	ZONE_NOT_SUPPORTED = 1;
+	ZONE_NOT_PERMITTED = 2;
+	ZONE_ENROLLMENT_FULL = 3;
+}
+
+enum GwArmModeT
+{
+	DISARM = 0;
+	ARM_DAY_HOME_ZONES_ONLY = 1;
+	ARM_NIGHT_SLEEP_ZONES_ONLY = 2;
+	ARM_ALL_ZONES = 3;
+}
+
+enum GwArmModeRspT
+{
+	ALL_ZONES_DISARMED = 0;
+	ONLY_DAY_HOME_ZONES_ARMED = 1;
+	ONLY_NIGHT_SLEEP_ZONES_ARMED = 2;
+	ALL_ZONES_ARMED = 3;
+}
+
+enum GwEmergencyCondTypeT
+{
+	EMERGENCY = 2;
+	FIRE = 3;
+	PANIC = 4;
+}
+
+enum GwThermostatSetpointModeT
+{
+	HEAT_SETPOINT = 0;
+	COOL_SETPOINT = 1;
+	BOTH_SETPOINTS = 2;
+}
+
+enum GwWindowCoveringActionT
+{
+	WC_UP_OPEN = 0;
+	WC_DOWN_CLOSE = 1;
+	WC_STOP = 2;
+	WC_GO_TO_LIFT_VALUE = 4;
+	WC_GO_TO_LIFT_PERCENT = 5;
+	WC_GO_TO_TILT_VALUE = 7;
+	WC_GO_TO_TILT_PERCENT = 8;
+}
+
+enum GwRegisterUnregisterT
+{
+	UNREGISTER_EXISTING_IMAGE = 0;
+	REGISTER_NEW_IMAGE = 1;
+}
+
+enum GwExecutionTimingTypeT
+{
+	EXECUTE_IMMEDIATELY = 0;
+	EXECUTE_DELAY_IS_SPECIFIED = 1;
+	EXECUTE_TIME_IS_SPECIFIED = 2;
+	HOLD_EXECUTION = 3;
+	NO_CHANGE = 255;
+}
+
+enum GwImageNotificationT
+{
+	DONT_SEND_NOTIFICATION = 0;
+	BROADCAST_NOTIFICATION = 1;
+	UNICAST_NOTIFICATION = 2;
+}
+
+enum GwImageUpdateModeT
+{
+	OTA_DOWNLOAD_ENABLED = 0;
+	NEW_OTA_DOWNLOADS_DISABLE = 1;
+	OTA_DOWNLOAD_DISABLE = 2;
+}
+
+message GwAddressStructT
+{
+	required GwAddressTypeT addresstype = 1;
+	optional fixed64 ieeeaddr = 2;
+	optional uint32 groupaddr = 3;
+	optional uint32 broadcastaddr = 4;
+	optional uint32 endpointid = 5;
+}
+
+message GwAttributeRecordT
+{
+	required uint32 attributeid = 1;
+	required GwZclAttributeDataTypesT attributetype = 2;
+	required bytes attributevalue = 3;
+}
+
+message GwAttributeReportT
+{
+	required uint32 attributeid = 1;
+	required GwZclAttributeDataTypesT attributetype = 2;
+	required uint32 minreportinterval = 3;
+	required uint32 maxreportinterval = 4;
+	optional uint32 reportablechange = 5;
+}
+
+message GwAttributeReportConfigT
+{
+	required GwStatusT status = 1;
+	required uint32 attributeid = 2;
+}
+
+message GwAttributeWriteStatusT
+{
+	required uint32 status = 1;
+	required uint32 attributeid = 2;
+}
+
+message GwClusterListT
+{
+	required uint32 clusterid = 1;
+	repeated uint32 attributelist = 2;
+}
+
+message GwZigbeeGenericCnf
+{
+	required GwCmdIdT cmdid = 1 [default = ZIGBEE_GENERIC_CNF];
+	required GwStatusT status = 2;
+	optional uint32 sequencenumber = 3;
+}
+
+message GwZigbeeGenericRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = ZIGBEE_GENERIC_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+}
+
+message GwAddGroupReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_ADD_GROUP_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 groupid = 3;
+	required string groupname = 4;
+}
+
+message GwGetGroupMembershipReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_GET_GROUP_MEMBERSHIP_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message GwGetGroupMembershipRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_GET_GROUP_MEMBERSHIP_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 capacity = 5;
+	repeated uint32 grouplist = 6;
+}
+
+message GwRemoveFromGroupReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_REMOVE_FROM_GROUP_REQ];
+	required GwAddressStructT dstaddress = 2;
+	optional uint32 groupid = 3;
+}
+
+message GwStoreSceneReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_STORE_SCENE_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 groupid = 3;
+	required uint32 sceneid = 4;
+}
+
+message GwRemoveSceneReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_REMOVE_SCENE_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 groupid = 3;
+	required uint32 sceneid = 4;
+}
+
+message GwRecallSceneReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_RECALL_SCENE_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 groupid = 3;
+	required uint32 sceneid = 4;
+}
+
+message GwGetSceneMembershipReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_GET_SCENE_MEMBERSHIP_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 groupid = 3;
+}
+
+message GwGetSceneMembershipRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_GET_SCENE_MEMBERSHIP_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 capacity = 5;
+	required uint32 groupid = 6;
+	required bytes scenelist = 7;
+}
+
+message GwSleepyDevicePacketPendingReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_SLEEPY_DEVICE_PACKET_PENDING_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message GwSleepyDeviceCheckInInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_SLEEPY_DEVICE_CHECK_IN_IND];
+	required GwAddressStructT srcaddress = 2;
+}
+
+message GwAttributeChangeInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_ATTRIBUTE_CHANGE_IND];
+	required uint32 endpointid = 2;
+	required uint32 clusterid = 3;
+	required uint32 attributeid = 4;
+	required GwZclAttributeDataTypesT attributetype = 5;
+	required bytes attributevalue = 6;
+}
+
+message GwGetDeviceAttributeListReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_GET_DEVICE_ATTRIBUTE_LIST_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message GwGetDeviceAttributeListRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_GET_DEVICE_ATTRIBUTE_LIST_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	repeated GwClusterListT clusterlist = 5;
+}
+
+message GwReadDeviceAttributeReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_READ_DEVICE_ATTRIBUTE_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 clusterid = 3;
+	repeated uint32 attributelist = 4;
+}
+
+message GwReadDeviceAttributeRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_READ_DEVICE_ATTRIBUTE_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 clusterid = 5;
+	repeated GwAttributeRecordT attributerecordlist = 6;
+}
+
+message GwWriteDeviceAttributeReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_WRITE_DEVICE_ATTRIBUTE_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 clusterid = 3;
+	repeated GwAttributeRecordT attributerecordlist = 4;
+}
+
+message GwWriteDeviceAttributeRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_WRITE_DEVICE_ATTRIBUTE_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 clusterid = 5;
+	repeated GwAttributeWriteStatusT attributewriteerrorlist = 6;
+}
+
+message GwSetAttributeReportingReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_SET_ATTRIBUTE_REPORTING_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 clusterid = 3;
+	repeated GwAttributeReportT attributereportlist = 4;
+}
+
+message GwSetAttributeReportingRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_SET_ATTRIBUTE_REPORTING_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 clusterid = 5;
+	repeated GwAttributeReportConfigT attributereportconfiglist = 6;
+}
+
+message GwAttributeReportingInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_ATTRIBUTE_REPORTING_IND];
+	required GwStatusT status = 2;
+	required GwAddressStructT srcaddress = 3;
+	required uint32 clusterid = 4;
+	repeated GwAttributeRecordT attributerecordlist = 5;
+}
+
+message GwSendZclFrameReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_SEND_ZCL_FRAME_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 endpointidsource = 3;
+	required uint32 profileid = 4;
+	required GwQualityOfServiceT qualityofservice = 5;
+	required GwSecurityOptionsT securityoptions = 6;
+	required uint32 clusterid = 7;
+	required GwFrameTypeT frametype = 8;
+	required GwMfrSpecificFlagT manufacturerspecificflag = 9;
+	optional uint32 manufacturercode = 10;
+	required GwClientServerDirT clientserverdirection = 11;
+	required GwDisableDefaultRspT disabledefaultrsp = 12;
+	optional uint32 sequencenumber = 13;
+	required uint32 commandid = 14;
+	required bytes payload = 15;
+}
+
+message GwZclFrameReceiveInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_ZCL_FRAME_RECEIVE_IND];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT srcaddress = 3;
+	required uint32 profileid = 4;
+	required uint32 endpointiddest = 5;
+	required uint32 clusterid = 6;
+	required GwFrameTypeT frametype = 7;
+	required GwMfrSpecificFlagT manufacturerspecificflag = 8;
+	optional uint32 manufacturercode = 9;
+	required GwClientServerDirT clientserverdirection = 10;
+	required GwDisableDefaultRspT disabledefaultrsp = 11;
+	required uint32 commandid = 12;
+	required bytes payload = 13;
+}
+
+message GwAlarmInd
+{
+	required GwCmdIdT cmdid = 1 [default = GW_ALARM_IND];
+	required GwAddressStructT srcaddress = 2;
+	required uint32 alarmcode = 3;
+	required uint32 clusterid = 4;
+}
+
+message GwAlarmResetReq
+{
+	required GwCmdIdT cmdid = 1 [default = GW_ALARM_RESET_REQ];
+	required GwAddressStructT dstaddress = 2;
+	optional uint32 alarmcode = 3;
+	optional uint32 clusterid = 4;
+}
+
+message DevZoneEnrollmentReqInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ZONE_ENROLLMENT_REQ_IND];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT srcaddress = 3;
+	required uint32 manufacturercode = 4;
+	required GwZoneTypeT zonetype = 5;
+}
+
+message DevZoneEnrollmentRsp
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ZONE_ENROLLMENT_RSP];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT dstaddress = 3;
+	required GwEnrollRspCodeT enrollmentresponsecode = 4;
+	required uint32 zoneid = 5;
+}
+
+message DevZoneStatusChangeInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ZONE_STATUS_CHANGE_IND];
+	required GwAddressStructT srcaddress = 2;
+	required uint32 zonestatus = 3;
+	required uint32 extendedstatus = 4;
+}
+
+message DevAceArmReqInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ACE_ARM_REQ_IND];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT srcaddress = 3;
+	required GwArmModeT armmode = 4;
+}
+
+message DevAceArmRsp
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ACE_ARM_RSP];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT dstaddress = 3;
+	required GwArmModeRspT armresponse = 4;
+}
+
+message DevAceBypassInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ACE_BYPASS_IND];
+	required GwAddressStructT srcaddress = 2;
+	required bytes zoneidlist = 3;
+}
+
+message DevAceEmergencyConditionInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ACE_EMERGENCY_CONDITION_IND];
+	required GwAddressStructT srcaddress = 2;
+	required GwEmergencyCondTypeT emergencyconditiontype = 3;
+}
+
+message DevAceGetZoneIdMapReqInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ACE_GET_ZONE_ID_MAP_REQ_IND];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT srcaddress = 3;
+}
+
+message DevAceGetZoneIdMapRsp
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ACE_GET_ZONE_ID_MAP_RSP];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT dstaddress = 3;
+	repeated uint32 zoneidmapsection = 4;
+}
+
+message DevAceGetZoneInformationReqInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ACE_GET_ZONE_INFORMATION_REQ_IND];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT srcaddress = 3;
+	required uint32 zoneid = 4;
+}
+
+message DevAceGetZoneInformationRsp
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_ACE_GET_ZONE_INFORMATION_RSP];
+	required uint32 sequencenumber = 2;
+	required GwAddressStructT dstaddress = 3;
+	required uint32 zoneid = 4;
+	required GwZoneTypeT zonetype = 5;
+	required fixed64 ieeeaddress = 6;
+}
+
+message DevSetIdentifyModeReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_SET_IDENTIFY_MODE_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 identifytime = 3;
+}
+
+message DevSetOnOffStateReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_SET_ONOFF_STATE_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required GwOnOffStateT state = 3;
+}
+
+message DevSetLevelReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_SET_LEVEL_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 transitiontime = 3;
+	required uint32 levelvalue = 4;
+}
+
+message DevGetLevelReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_LEVEL_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message DevGetLevelRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_LEVEL_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 levelvalue = 5;
+}
+
+message DevGetOnOffStateReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_ONOFF_STATE_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message DevGetOnOffStateRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_ONOFF_STATE_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required GwOnOffStateValueT statevalue = 5;
+}
+
+message DevSetColorReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_SET_COLOR_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required uint32 huevalue = 3;
+	required uint32 saturationvalue = 4;
+}
+
+message DevGetColorReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_COLOR_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message DevGetColorRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_COLOR_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 huevalue = 5;
+	required uint32 satvalue = 6;
+}
+
+message DevGetTempReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_TEMP_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message DevGetTempRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_TEMP_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 temperaturevalue = 5;
+}
+
+message DevGetPowerReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_POWER_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message DevGetPowerRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_POWER_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 powervalue = 5;
+}
+
+message DevGetHumidityReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_HUMIDITY_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message DevGetHumidityRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_HUMIDITY_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required uint32 humidityvalue = 5;
+}
+
+message DevSetDoorLockReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_SET_DOOR_LOCK_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required GwLockModeT lockmode = 3;
+	required bytes pincodevalue = 4;
+}
+
+message DevSetDoorLockRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_SET_DOOR_LOCK_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required GwLockModeT lockmode = 5;
+}
+
+message DevGetDoorLockStateReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_DOOR_LOCK_STATE_REQ];
+	required GwAddressStructT dstaddress = 2;
+}
+
+message DevGetDoorLockStateRspInd
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_GET_DOOR_LOCK_STATE_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GwStatusT status = 3;
+	required GwAddressStructT srcaddress = 4;
+	required GwLockStateT lockstate = 5;
+	required GwDoorStateT doorstate = 6;
+}
+
+message DevThermostatSetpointChangeReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_THERMOSTAT_SETPOINT_CHANGE_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required GwThermostatSetpointModeT mode = 3;
+	required int32 amount = 4;
+}
+
+message DevWindowCoveringActionReq
+{
+	required GwCmdIdT cmdid = 1 [default = DEV_WINDOW_COVERING_ACTION_REQ];
+	required GwAddressStructT dstaddress = 2;
+	required GwWindowCoveringActionT action = 3;
+	optional uint32 value = 4;
+	optional uint32 percentage = 5;
+}
+

@@ -1,0 +1,22 @@
+option java_package = "com.example.andrzej.myapplication";
+option java_outer_classname = "ZigbeeMsg";
+
+enum ZigbeeCmd
+{
+  ZB_CMD_GET_DEV_LIST = 1;
+  ZB_CMD_DEV_LIST_ITEM = 2;
+
+
+}
+
+message ZigbeeGetDevicesList
+{
+  required ZigbeeCmd	cmd = 1 [ default = ZB_CMD_GET_DEV_LIST];
+}
+
+message ZigbeeDeviceItem
+{
+  required ZigbeeCmd	cmd = 1 [ default = ZB_CMD_DEV_LIST_ITEM];
+  required uint32	id = 2;
+  required string	name = 3;
+}

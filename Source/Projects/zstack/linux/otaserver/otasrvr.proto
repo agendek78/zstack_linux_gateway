@@ -1,0 +1,130 @@
+enum ZStackOTASysIDs
+{
+	RPC_SYS_PB_OTA_MGR = 20;
+}
+
+enum OtaMgrCmdIdT
+{
+	ZIGBEE_GENERIC_CNF = 0;
+	ZIGBEE_GENERIC_RSP_IND = 1;
+	OTA_UPDATE_IMAGE_REGISTERATION_REQ = 2;
+	OTA_UPDATE_ENABLE_REQ = 3;
+	OTA_UPDATE_ENABLE_CNF = 4;
+	OTA_UPDATE_DL_FINISHED_IND = 5;
+	OTA_UPDATE_APPLY_IMAGE_REQ = 6;
+}
+
+enum AddressMode
+{
+	UNICAST = 0;
+	GROUPCAST = 1;
+	BROADCAST = 2;
+	SELF = 3;
+}
+
+enum GenericStatus
+{
+	SUCCESS = 0;
+	FAILURE = 1;
+}
+
+enum OtaStatus
+{
+	OTA_SUCCESS = 0;
+	INVALID_IMAGE = 1;
+	REQUIRE_MORE_IMAGE = 2;
+	ABORT = 3;
+}
+
+enum OtaExecuteType
+{
+	IMMEDIATE = 0;
+	DELAY = 1;
+	TIME = 2;
+	HOLD = 3;
+	NO_CHANGE = 255;
+}
+
+enum OtaNotificationType
+{
+	DO_NOT_SEND = 0;
+	BROADCAST_NOT = 1;
+	UNICAST_NOT = 2;
+}
+
+enum OtaUpdateCnfStatus
+{
+	UPDATE_SUCCESS = 0;
+	BAD_FILE_FORMAT = 1;
+	CANT_UNREGISTER = 2;
+	OUT_OF_RESOURCES = 3;
+}
+
+enum OtaEnableModes
+{
+	DOWNLOAD_ENABLE = 0;
+	NEW_DOWNLOAD_DISABLE = 1;
+	DOWNLOAD_DISABLE = 2;
+}
+
+message AddressStruct
+{
+	required AddressMode addrmode = 1;
+	optional fixed64 ieeeaddr = 2;
+	optional uint32 groupaddr = 3;
+	optional uint32 broadcaseaddr = 4;
+	optional uint32 endpointid = 5;
+}
+
+message OtaZigbeeGenericCnf
+{
+	required OtaMgrCmdIdT cmdid = 1 [default = ZIGBEE_GENERIC_CNF];
+	required GenericStatus status = 2;
+	optional uint32 sequencenumber = 3;
+}
+
+message OtaZigbeeGenericRspInd
+{
+	required OtaMgrCmdIdT cmdid = 1 [default = ZIGBEE_GENERIC_RSP_IND];
+	required uint32 sequencenumber = 2;
+	required GenericStatus status = 3;
+}
+
+message OtaUpdateImageRegisterationReq
+{
+	required OtaMgrCmdIdT cmdid = 1 [default = OTA_UPDATE_IMAGE_REGISTERATION_REQ];
+	required string imagepath = 2;
+	required bool registerunregister = 3;
+	required OtaExecuteType executetiming = 4;
+	optional uint32 executiondelay = 5;
+	optional uint32 executiontime = 6;
+	required bool updatesupporteddevicelist = 7;
+	repeated fixed64 supporteddevicelist = 8;
+	required OtaNotificationType notification = 9;
+}
+
+message OtaUpdateEnableReq
+{
+	required OtaMgrCmdIdT cmdid = 1 [default = OTA_UPDATE_ENABLE_REQ];
+	required OtaEnableModes mode = 2;
+}
+
+message OtaUpdateEnableCnf
+{
+	required OtaMgrCmdIdT cmdid = 1 [default = OTA_UPDATE_ENABLE_CNF];
+	required bool status = 2;
+}
+
+message OtaUpdateDlFinishedInd
+{
+	required OtaMgrCmdIdT cmdid = 1 [default = OTA_UPDATE_DL_FINISHED_IND];
+	required OtaStatus status = 2;
+	required AddressStruct address = 3;
+}
+
+message OtaUpdateApplyImageReq
+{
+	required OtaMgrCmdIdT cmdid = 1 [default = OTA_UPDATE_ENABLE_REQ];
+	required AddressStruct address = 2;
+}
+

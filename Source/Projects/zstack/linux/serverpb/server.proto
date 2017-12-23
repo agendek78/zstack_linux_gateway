@@ -1,0 +1,121 @@
+enum ZStackServerSysIdT
+{
+	RPC_SYS_PB_SRVR = 25;
+}
+
+enum SrvrCmdIdT
+{
+	SRVR_GET_IEEE_ADDRESS_REQ = 0;
+	SRVR_GET_IEEE_ADDRESS_CNF = 1;
+	SRVR_GET_SHORT_ADDRESS_REQ = 2;
+	SRVR_GET_SHORT_ADDRESS_CNF = 3;
+	SRVR_GET_DEVICE_INFO_REQ = 4;
+	SRVR_GET_DEVICE_INFO_CNF = 5;
+	SRVR_GET_DEVICE_STATUS_REQ = 6;
+	SRVR_GET_DEVICE_STATUS_CNF = 7;
+	SRVR_SET_DEVICE_STATUS_REQ = 8;
+	SRVR_SET_DEVICE_STATUS_CNF = 9;
+}
+
+enum SrvrDeviceStatusT
+{
+	DEVICE_OFF_LINE = 0;
+	DEVICE_ON_LINE = 1;
+	DEVICE_REMOVED = 2;
+	DEVICE_NA = 255;
+}
+
+enum SrvrStatusT
+{
+	STATUS_SUCCESS = 0;
+	STATUS_FAILURE = 1;
+	STATUS_BUSY = 2;
+	STATUS_INVALID_PARAMETER = 3;
+	STATUS_TIMEOUT = 4;
+}
+
+message SrvrSimpleDescriptorT
+{
+	required uint32 endpointid = 1;
+	required uint32 profileid = 2;
+	required uint32 deviceid = 3;
+	required uint32 devicever = 4;
+	repeated uint32 inputclusters = 5;
+	repeated uint32 outputclusters = 6;
+}
+
+message SrvrDeviceInfoT
+{
+	required uint32 networkaddress = 1;
+	required fixed64 ieeeaddress = 2;
+	optional fixed64 parentieeeaddress = 3;
+	required uint32 manufacturerid = 4;
+	repeated SrvrSimpleDescriptorT simpledesclist = 5;
+	required SrvrDeviceStatusT devicestatus = 6;
+}
+
+message SrvrGetIeeeAddressReq
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_GET_IEEE_ADDRESS_REQ];
+	required uint32 shortaddress = 2;
+}
+
+message SrvrGetIeeeAddressCnf
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_GET_IEEE_ADDRESS_CNF];
+	required SrvrStatusT status = 2;
+	required fixed64 ieeeaddress = 3;
+}
+
+message SrvrGetShortAddressReq
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_GET_SHORT_ADDRESS_REQ];
+	required fixed64 ieeeaddress = 2;
+}
+
+message SrvrGetShortAddressCnf
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_GET_SHORT_ADDRESS_CNF];
+	required SrvrStatusT status = 2;
+	required uint32 shortaddress = 3;
+}
+
+message SrvrGetDeviceInfoReq
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_GET_DEVICE_INFO_REQ];
+	required fixed64 ieeeaddress = 2;
+}
+
+message SrvrGetDeviceInfoCnf
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_GET_DEVICE_INFO_CNF];
+	required SrvrStatusT status = 2;
+	required SrvrDeviceInfoT deviceinfo = 3;
+}
+
+message SrvrGetDeviceStatusReq
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_GET_DEVICE_STATUS_REQ];
+	required fixed64 ieeeaddress = 2;
+}
+
+message SrvrGetDeviceStatusCnf
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_GET_DEVICE_STATUS_CNF];
+	required SrvrStatusT status = 2;
+	required SrvrDeviceStatusT devicestatus = 3;
+}
+
+message SrvrSetDeviceStatusReq
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_SET_DEVICE_STATUS_REQ];
+	required fixed64 ieeeaddress = 2;
+	required SrvrDeviceStatusT devicestatus = 3;
+}
+
+message SrvrSetDeviceStatusCnf
+{
+	required SrvrCmdIdT cmdid = 1 [default = SRVR_SET_DEVICE_STATUS_CNF];
+	required SrvrStatusT status = 2;
+}
+
