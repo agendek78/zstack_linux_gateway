@@ -16,13 +16,13 @@ include $(INCLUDE_DIR)/package.mk
 define Package/ZStackHomeAutomation
 	DEPENDS:= +libprotobuf-c +libpthread
 	SECTION:=ZStack
-	CATEGORY:=extensions
+	CATEGORY:=Network
 	TITLE:=Z-Stack ZNP Home Automation Gateway
 endef
 
 # Package description; a more verbose description on what our package does
 define Package/ZStackHomeAutomation/description
-  TI's Z-Stack Home Automation Gateway for OpenOCD environment.
+  TI's Z-Stack Home Automation Gateway for OpenWRT environment.
 endef
 
 # Package preparation instructions; create the build directory and copy the source code. 
@@ -72,6 +72,7 @@ endef
 define Package/ZStackHomeAutomation/install
 	$(INSTALL_DIR) $(1)$(INSTALL_PATH)
 	$(INSTALL_BIN) $(ZNP_SERVER)/server_znp $(1)$(INSTALL_PATH)
+	$(INSTALL_BIN) $(ZNP_SERVER)/config.ini $(1)$(INSTALL_PATH)
 	$(INSTALL_BIN) $(NWK_MGR)/nwkmgr_svr $(1)$(INSTALL_PATH)
 	$(INSTALL_BIN) $(NWK_MGR)/nwkmgr_config.ini $(1)$(INSTALL_PATH)
 	$(INSTALL_BIN) $(GW_SERVER)/gateway_svr $(1)$(INSTALL_PATH)

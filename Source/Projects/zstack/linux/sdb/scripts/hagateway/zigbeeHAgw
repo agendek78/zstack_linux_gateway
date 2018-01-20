@@ -34,7 +34,7 @@ ZBEE_RESET_GPIO_LINE=
 
 # assuming all boards are active low for now, but
 # these parameters allow polarity to be changed if ever needed
-ZBEE_RESET_ACTIVE_VALUE=0	
+ZBEE_RESET_ACTIVE_VALUE=0
 ZBEE_RESET_INACTIVE_VALUE=1
 
 ZBEE_RESET_EXPLICIT_REVERSE=1
@@ -202,19 +202,19 @@ setup_for_mipsel()
 	echo "running zigbeegw.scr on an MIPSEL"
 	export TARGET=mipsel
 
-	export NPI_NAME=NPI_lnx_mipsel_server
+	export NPI_NAME=npi_lnx
 
 	export NPI_CONFIG=NPI_Gateway.cfg
 	export NPI_CMD="./$NPI_NAME $NPI_CONFIG debugBig"
 
-	export ZLSZNP_NAME=ZLSZNP_mipsel
+	export ZLSZNP_NAME=server_znp
 	export ZLSZNP_CONFIG=config.ini
 	export ZLSZNP_CMD="./$ZLSZNP_NAME 127.0.0.1:2533 $ZLSZNP_CONFIG" 
 
-	export GATEWAY_NAME=GATEWAY_SRVR_mipsel
+	export GATEWAY_NAME=gateway_svr
 	export GATEWAY_SERVER_CMD="./$GATEWAY_NAME 127.0.0.1:2536 127.0.0.1:2540"
 
-	export NWKMGR_NAME=NWKMGR_SRVR_mipsel
+	export NWKMGR_NAME=nwkmgr_svr
 	export NWKMGR_CMD="./$NWKMGR_NAME 127.0.0.1:2536"
 
 	export OTA_SERVER_NAME=OTA_SRVR_mipsel
@@ -326,9 +326,10 @@ else
 		;;	
 
 	mips | mipsel)
-		ignore_zbee_reset=1
+		ZBEE_RESET_EXPLICIT_REVERSE=1
+		ZBEE_RESET_GPIO_LINE=cc2538-reset
 		ZBEE_SERIAL_PORT=ttyS1
-		setup_for_mipsel		
+		setup_for_mipsel
 		;;
 
 	help)
@@ -960,45 +961,14 @@ check_ttyACM()
 
 hit_gpio_reset_line()
 {
-
-	GPIO_DIR=gpio"$ZBEE_RESET_GPIO_LINE"
-	device_exported $ZBEE_RESET_GPIO_LINE
-	rc=$?
-
-	if [ $VERBOSE -ge 1 ]; then
-		echo -n hitting gpio_reset line, GPIO dir is $GPIO_DIR
-		echo device_exported is $rc
-	fi
-
-	if [ $rc -eq 1 ]; then
-		# echo gpio device exported, so unexporting
-		if [ $VERBOSE -ge 1 ]; then
-		 echo "echo $ZBEE_RESET_GPIO_LINE  > /sys/class/gpio/unexport"
-		fi
-		echo "$ZBEE_RESET_GPIO_LINE" > /sys/class/gpio/unexport
-	fi
-
-	if [ $VERBOSE -ge 1 ]; then
-		echo "echo $ZBEE_RESET_GPIO_LINE  > /sys/class/gpio/export "
-	fi
-	echo "$ZBEE_RESET_GPIO_LINE"     > /sys/class/gpio/export
-
-	# make sure the device was created
-	if [ ! -e /sys/class/gpio/$GPIO_DIR ]; then
-		echo "cannot do HW reset of SOC, $GPIO_DIR not found!"
-		exit 23
-	fi
-
 	# set the GPIO reset line active
-	echo "out"                       > /sys/class/gpio/$GPIO_DIR/direction
-	echo "$ZBEE_RESET_ACTIVE_VALUE"  > /sys/class/gpio/$GPIO_DIR/value
-
+	echo "$ZBEE_RESET_ACTIVE_VALUE"  > /sys/class/gpio/$ZBEE_RESET_GPIO_LINE/value
 	
 	# on most boards, set the GPIO reset line inactive
 	# no delay is needed, apparently...
 
 	if [ $ZBEE_RESET_EXPLICIT_REVERSE -eq 1 ]; then
-	 echo "$ZBEE_RESET_INACTIVE_VALUE" > /sys/class/gpio/$GPIO_DIR/value
+	 echo "$ZBEE_RESET_INACTIVE_VALUE" > /sys/class/gpio/$ZBEE_RESET_GPIO_LINE/value
 	fi
 }
 
