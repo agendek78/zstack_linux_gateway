@@ -52,7 +52,7 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 #include <pthread.h>
-#include <bits/local_lim.h>
+#include <limits.h>
 #include <errno.h>
 
 #include "hal_rpc.h"

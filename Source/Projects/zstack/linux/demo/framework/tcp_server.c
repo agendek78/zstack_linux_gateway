@@ -28,6 +28,10 @@
 #define FALSE false
 #endif
 
+#ifndef PTHREAD_STACK_MIN
+#define PTHREAD_STACK_MIN (16 * 1024)
+#endif
+
 #define APIS_CONNECTION_QUEUE_SIZE  4
 
 #define uiPrintfEx(dbg, ...)    printf(__VA_ARGS__)

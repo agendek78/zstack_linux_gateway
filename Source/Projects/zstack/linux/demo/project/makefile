@@ -1,67 +1,53 @@
 PROJ_DIR = .
 
-OBJ_DIR = $(PROJ_DIR)/out
+LIBS = -lpthread -lprotobuf-c
 
-LIBS = -L$(PROTOLIB)
+INCLUDE = -I$(PROJ_DIR) -I../engines -I../framework -I../../nwkmgr -I../../hagateway -I../../otaserver -I$(PROJ_DIR)/../remoteUi
 
-INCLUDE = -I$(PROJ_DIR) -I../engines -I../framework -I../../nwkmgr -I../../hagateway -I../../otaserver -I$(PROJ_DIR)/../remoteUi -I$(PROTOINC)
+SRCS = \
+	./main.c \
+	../framework/polling.c \
+	../framework/timer_utils.c \
+	../framework/socket_interface.c \
+	../framework/tcp_client.c \
+	../framework/user_interface.c \
+	../framework/data_structures.c \
+	../framework/macros.c \
+	../engines/network_info_engine.c \
+	../engines/device_list_engine.c \
+	../engines/sensor_engine.c \
+	../engines/state_reflector.c \
+	../engines/attribute_engine.c \
+	../engines/actions_engine.c \
+	../engines/commissioning_engine.c \
+	../engines/system_engine.c \
+	../engines/group_scene_engine.c \
+	../engines/ota_engine.c \
+	../../otaserver/otasrvr.pb-c.c \
+	../../nwkmgr/nwkmgr.pb-c.c \
+	../../hagateway/gateway.pb-c.c \
 
-CFLAGS= -c -Wall -g -std=gnu99
 
-VPATH = $(PROJ_DIR):$(PROJ_DIR)/../framework:$(PROJ_DIR)/../engines:$(PROJ_DIR)/../../nwkmgr:$(PROJ_DIR)/../../hagateway:$(PROJ_DIR)/../../otaserver:$(PROJ_DIR)/../remoteUi
+#	trace.c \
+#	zmain.c \
+#	tcp_server.c \
+#	remoteMain.c \
 
-SRCS = main.c \
-	polling.c \
-	timer_utils.c \
-	socket_interface.c \
-	tcp_client.c \
-	user_interface.c \
-	data_structures.c \
-	network_info_engine.c \
-	device_list_engine.c \
-	sensor_engine.c \
-	state_reflector.c \
-	attribute_engine.c \
-	actions_engine.c \
-	commissioning_engine.c \
-	system_engine.c \
-	ota_engine.c \
-	nwkmgr.pb-c.c \
-	gateway.pb-c.c \
-	otasrvr.pb-c.c \
-	group_scene_engine.c \
-	macros.c \
-	tcp_server.c \
-	remoteMain.c \
+APP_OBJS = $(notdir $(SRCS:%.c=%.o)) 
 
-OBJS = $(SRCS:%.c=%.o) 
+.PHONY: all clean 
 
-PROJECT_FOLDER = demo/project/
+all: ha_main.bin
 
-.PHONY: all clean create_output
-
-all: create_output main.bin 
-
-create_output:
-	@echo "VPATH is $(VPATH)"
-	@echo "********************************************************" 
-	@echo "Check existance of output folder" 
-	-if test ! -d $(OBJ_DIR); then mkdir $(OBJ_DIR); fi
-
-main.bin: $(OBJS)
-	@echo "Building $@..."
-	$(CC) -rdynamic -o $@ $(addprefix $(OBJ_DIR)/,$(OBJS)) $(LIBS) -lprotobuf-c -lpthread
-	@if [ -n "$(EXTRACT_FILES)" ]; then echo $(MAKEFILE_LIST) | $(EXTRACT_FILES) >> project_file_list.txt; fi
-	@if [ -n "$(EXTRACT_FILES)" ]; then sort -u -V project_file_list.txt | grep -v /usr/ >actual_specific_project_file_list.txt; fi
-	@if [ -n "$(EXTRACT_FILES)" ]; then sort -u -V project_file_list.txt | grep /usr/ >actual_standard_project_file_list.txt; fi
-
-%.o: %.c 
-	@echo "Compiling $< into $@"
-	@$(CC) $(CFLAGS) $(INCLUDE) $(DEFS) $< -o $(OBJ_DIR)/$@
-	@if [ -n "$(EXTRACT_FILES)" ]; then $(CC) -M $< $(INCLUDE) $(DEFS) | $(EXTRACT_FILES) >> project_file_list.txt; fi
-
-# rule for cleaning files generated during compilations.
 clean:
-	@echo "Cleaning up $(OBJS) $(OBJ_DIR)/*"	
-	/bin/rm -f main.bin $(OBJS) $(OBJ_DIR)/*
-	rm -f project_file_list.txt
+	@echo "********************************************************" 
+	@echo "Cleaning all" 
+
+ha_main.bin: $(APP_OBJS)
+	@echo linking objects $(APP_OBJS)
+	@$(CC) -rdynamic -o $@ $^ $(LDFLAGS) $(LIBS)
+
+%.o:
+	@echo "Compiling $(filter %$(basename $@).c,$(SRCS)) into $@"
+	@$(CC) -c $(filter %$(basename $@).c,$(SRCS)) $(CFLAGS) $(INCLUDE) -include ../hal/hal_types.h
+

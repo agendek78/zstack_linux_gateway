@@ -42,7 +42,7 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/signal.h>
+#include <signal.h>
 #include <fcntl.h>
 #include <termios.h>
 #include <stdlib.h>

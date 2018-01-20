@@ -149,16 +149,6 @@ int main(int argc, char **argv)
 {
 	char * log_filename = NULL;
 
-	//register_segmentation_fault_handler();
-    if (remoteMainInit() != 0)
-    {
-        return -1;
-    }
-
-    getchar();
-
-    return 0;
-
     /* check command line arguments */
     if ((argc < 7) || (argc > 8))
 	{
@@ -178,10 +168,12 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
+/*
 	if (remoteMainInit() != 0)
 	{
 	    return -1;
 	}
+*/
 
 	if (si_init(argv[1], htons( atoi(argv[2])), argv[3], htons( atoi(argv[4])), argv[5], htons( atoi(argv[6]))) == 0)
 	{

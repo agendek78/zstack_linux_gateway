@@ -49,7 +49,8 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <signal.h>
-#include <bits/local_lim.h>
+//#include <bits/local_lim.h>
+#include <limits.h>
 
 #ifndef NPI_UNIX
 #include <netdb.h>
