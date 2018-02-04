@@ -46,6 +46,7 @@
 #include <unistd.h>
 
 #include "tcp_client.h"
+#include "tcp_sessions.h"
 #include "polling.h"
 #include "types.h"
 #include "dbgLog.h"
@@ -79,19 +80,20 @@ int tcp_new_server_connection(server_details_t * server_details, const char * ho
 {
     struct addrinfo hints;
     struct addrinfo *result;
+    int status;
 
     memset(&hints, 0, sizeof(struct addrinfo));
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = AI_PASSIVE;    /* For wildcard IP address */
+    hints.ai_flags = AI_PASSIVE | AI_CANONNAME;    /* For wildcard IP address */
     hints.ai_protocol = 0;          /* Any protocol */
     hints.ai_canonname = NULL;
     hints.ai_addr = NULL;
     hints.ai_next = NULL;
 
-    if (getaddrinfo(NULL, hostname, &hints, &result) != 0)
+    if ((status = getaddrinfo(hostname, 0, &hints, &result)) != 0)
     {
-        fprintf(stderr,"ERROR, no such host as %s\n", hostname);
+        fprintf(stderr,"ERROR, no such host as %s. Error %d - %s\n", hostname, status, gai_strerror(status));
         return -1;
     }
 
@@ -108,7 +110,14 @@ int tcp_new_server_connection(server_details_t * server_details, const char * ho
 
 	bzero((char *) &server_details->serveraddr, sizeof(server_details->serveraddr));
 	server_details->serveraddr.sin_family = AF_INET;
-	bcopy((char *)result->ai_addr->sa_data, (char *)&server_details->serveraddr.sin_addr.s_addr, result->ai_addrlen);
+
+	if (result->ai_family != AF_INET)
+	{
+	  DBG_ERR("Resolved address isn't supported!");
+	  return -1;
+	}
+
+	bcopy((char *) &result->ai_addr->sa_data[2], (char *) &server_details->serveraddr.sin_addr.s_addr, 4);
 	server_details->serveraddr.sin_port = port;
 	server_details->server_incoming_data_handler = server_incoming_data_handler;
 	server_details->server_reconnection_timer.in_use = false;
@@ -118,6 +127,7 @@ int tcp_new_server_connection(server_details_t * server_details, const char * ho
 
 	freeaddrinfo(result);
 
+	tcp_sessions_add_client(server_details);
 	tcp_socket_reconnect_to_server(server_details);
 	
 	return 0;
@@ -135,6 +145,12 @@ int tcp_connect_to_server(server_details_t * server_details)
 	
 	fd = socket(AF_INET, SOCK_STREAM, 0);
 	
+	DBG_LOG("IP addr %d.%d.%d.%d:%d", server_details->serveraddr.sin_addr.s_addr & 0xFF,
+	    (server_details->serveraddr.sin_addr.s_addr >> 8) & 0xFF,
+	    (server_details->serveraddr.sin_addr.s_addr >> 16) & 0xFF,
+	    (server_details->serveraddr.sin_addr.s_addr >> 24) & 0xFF,
+	    ntohs(server_details->serveraddr.sin_port));
+
 	if (fd < 0)
 	{
 		DBG_ERR("ERROR opening socket");

@@ -54,7 +54,7 @@
 typedef void (* server_incoming_data_handler_t)(void * buf, int len);
 typedef void (* server_connected_disconnected_handler_t)(void);
 
-typedef struct
+typedef struct server_details_s
 {
 	struct sockaddr_in serveraddr;
 	server_incoming_data_handler_t server_incoming_data_handler;
@@ -64,6 +64,7 @@ typedef struct
 	server_connected_disconnected_handler_t server_connected_disconnected_handler;
 	bool connected;
 	int confirmation_timeout_interval;
+	uint8_t subsystem;
 } server_details_t;
 
 /******************************************************************************

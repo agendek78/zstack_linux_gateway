@@ -75,7 +75,7 @@ int tcp_send_packet(server_details_t * server_details, uint8_t * buf, int len)
 	return 0;
 }
 
-int tcp_new_server_connection(server_details_t * server_details, char * hostname, u_short port, server_incoming_data_handler_t server_incoming_data_handler, char * name, server_connected_disconnected_handler_t server_connected_disconnected_handler)
+int tcp_new_server_connection(server_details_t * server_details, const char * hostname, u_short port, server_incoming_data_handler_t server_incoming_data_handler, char * name, server_connected_disconnected_handler_t server_connected_disconnected_handler)
 {
     struct addrinfo hints;
     struct addrinfo *result;

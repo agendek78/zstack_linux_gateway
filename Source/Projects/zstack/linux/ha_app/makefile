@@ -4,6 +4,8 @@ LIBS = -lpthread -lprotobuf-c
 
 INCLUDE = -I$(PROJ_DIR) -I../nwkmgr -I../hagateway
 
+CFLAGS = -g -O0
+
 SRCS = \
 	$(PROJ_DIR)/main.c \
 	$(PROJ_DIR)/remoteMain.c \
@@ -11,11 +13,14 @@ SRCS = \
 	$(PROJ_DIR)/tcp_client.c \
 	$(PROJ_DIR)/tcp_server.c \
 	$(PROJ_DIR)/polling.c \
-	$(PROJ_DIR)/timer_utils.c 
-	
-	
-		
-	
+	$(PROJ_DIR)/timer_utils.c \
+	$(PROJ_DIR)/idleCb.c \
+	$(PROJ_DIR)/network_info_engine.c \
+	$(PROJ_DIR)/device_list_engine.c \
+	$(PROJ_DIR)/tcp_sessions.c \
+	../nwkmgr/nwkmgr.pb-c.c \
+
+
 #	../framework/polling.c \
 #	../framework/timer_utils.c \
 #	../framework/socket_interface.c \

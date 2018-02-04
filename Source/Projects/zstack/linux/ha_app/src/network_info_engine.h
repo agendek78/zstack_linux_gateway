@@ -1,9 +1,9 @@
 /*******************************************************************************
- Filename:       tcp_client.h
+ Filename:       network_info_engine.h
  Revised:        $Date$
  Revision:       $Revision$
 
- Description:   Client communication via TCP ports
+ Description:
 
 
  Copyright 2013 Texas Instruments Incorporated. All rights reserved.
@@ -35,42 +35,18 @@
  Should you have any questions regarding your right to use this Software,
  contact Texas Instruments Incorporated at www.TI.com.
 *******************************************************************************/
-#ifndef TCP_CLIENT_H
-#define TCP_CLIENT_H
+#ifndef NETWORK_INFO_ENGINE_H
+#define NETWORK_INFO_ENGINE_H
 
-/******************************************************************************
+/*******************************************************************************
  * Includes
- *****************************************************************************/
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
+ ******************************************************************************/
+#include "types.h"
 
-#include "timer_utils.h"
-
-/******************************************************************************
- * Types
- *****************************************************************************/
-
-typedef void (* server_incoming_data_handler_t)(void * buf, int len);
-typedef void (* server_connected_disconnected_handler_t)(void);
-
-typedef struct
-{
-	struct sockaddr_in serveraddr;
-	server_incoming_data_handler_t server_incoming_data_handler;
-	int fd_index;
-	tu_timer_t server_reconnection_timer;
-	char * name;
-	server_connected_disconnected_handler_t server_connected_disconnected_handler;
-	bool connected;
-	int confirmation_timeout_interval;
-} server_details_t;
-
-/******************************************************************************
+/*******************************************************************************
  * Function Prototypes
- *****************************************************************************/
-int tcp_new_server_connection(server_details_t * server_details, const char * hostname, u_short port, server_incoming_data_handler_t server_incoming_data_handler, char * name, server_connected_disconnected_handler_t server_connected_disconnected_handler);
-int tcp_disconnect_from_server(server_details_t * server);
-int tcp_send_packet(server_details_t * server_details, uint8_t * buf, int len);
+ ******************************************************************************/
+void nwk_send_info_request(void);
+void nwk_process_ready_ind(pkt_buf_t * pkt);
 
-#endif /* TCP_CLIENT_H */
+#endif /* NETWORK_INFO_ENGINE_H */

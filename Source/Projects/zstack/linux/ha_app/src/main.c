@@ -23,6 +23,7 @@
 
 #include "remoteMain.h"
 #include "nwkMgrConn.h"
+#include "polling.h"
 
 /*******************************************************************************
  * Constants
@@ -37,8 +38,11 @@
  ******************************************************************************/
 int main(int argc, char **argv) 
 {
-  nwkMgrConnInit("127.0.0.1", 2531);
+  if (nwkMgrConnInit("localhost", htons(2540)) == 0)
+  {
+	  //remoteMainInit();
+	  while (polling_process_activity());
+  }
 
-  remoteMainInit();
   return 0;
 }

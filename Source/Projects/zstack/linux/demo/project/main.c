@@ -59,7 +59,7 @@
 #include "device_list_engine.h"
 #include "data_structures.h"
 #include "ota_engine.h"
-#include "remoteMain.h"
+//#include "remoteMain.h"
 
 /*******************************************************************************
  * Constants
